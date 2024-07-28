@@ -1,0 +1,179 @@
+unit formDashboard;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Buttons,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Data.Win.ADODB, Vcl.OleServer,
+  ExcelXP, System.Win.ComObj;
+
+type
+  Tform_dashboard = class(TForm)
+    pageControlTop: TPageControl;
+    tabAnggota: TTabSheet;
+    tabFilm: TTabSheet;
+    tabPinjam: TTabSheet;
+    stsBar: TStatusBar;
+    btnAnggota: TSpeedButton;
+    btnLaporanAnggota: TSpeedButton;
+    btnLaporanFilm: TSpeedButton;
+    btnFilm: TSpeedButton;
+    pageControlBottom: TPageControl;
+    tabInfoHome: TTabSheet;
+    tabInfoAnggota: TTabSheet;
+    tabInfoFilm: TTabSheet;
+    tabInfoPinjam: TTabSheet;
+    panelHome: TPanel;
+    btnTabelAnggota: TSpeedButton;
+    gridAnggota: TDBGrid;
+    lblSearch: TLabel;
+    txtSearch: TEdit;
+    btnExportExcel: TSpeedButton;
+
+
+
+    procedure btnAnggotaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnTabelAnggotaClick(Sender: TObject);
+    procedure txtSearchChange(Sender: TObject);
+    procedure gridAnggotaDblClick(Sender: TObject);
+    procedure btnExportExcelClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_dashboard: Tform_dashboard;
+
+implementation
+
+uses
+  formAnggota, dataModulDB;
+
+{$R *.dfm}
+
+procedure Tform_dashboard.btnAnggotaClick(Sender: TObject);
+begin
+  form_anggota.Show;
+end;
+
+procedure Tform_dashboard.btnExportExcelClick(Sender: TObject);
+
+var
+  Conn: TADOConnection;
+  Query: TADOQuery;
+  ExcelApp: Variant;
+  Sheet: Variant;
+  Row, Col: Integer;
+
+begin
+  Conn := TADOConnection.Create(nil);
+  Query := TADOQuery.Create(nil);
+  try
+    // Konfigurasi koneksi ke MySQL
+    Conn.ConnectionString := 'Provider=dbLocal;' + 'Password=rangga;' +
+      'Persist Security Info=True;' + 'User ID=rangga;' +
+      'Data Source=rentaldvd;' + 'Initial Catalog=anggota;' +
+      'LibraryLocation =' + ExtractFilePath(Application.ExeName) +
+      'libmysql.dll';
+    Conn.Open;
+
+    Query.Connection := Conn;
+    Query.SQL.Text := 'SELECT id, nama, pekerjaan, alamat, telp FROM anggota';
+    Query.Open;
+
+    ExcelApp := CreateOleObject('Excel.Application');
+    ExcelApp.Workbooks.Add;
+    Sheet := ExcelApp.Workbooks[1].WorkSheets[1];
+
+    // tulis Header kolom
+    for Col := 1 to Query.FieldCount do
+      Sheet.Cells[1, Col].Value := Query.Fields[Col - 1].FieldName;
+
+    // Tulis data baris
+    Row := 2;
+    while not Query.Eof do
+    begin
+      for Col := 1 to Query.FieldCount do
+        Sheet.Cells[Row, Col].Value := Query.Fields[Col - 1].Value;
+      Query.Next;
+      Inc(Row);
+    end;
+
+    // Simpan file Excel
+    ExcelApp.ActiveWorkbook.SaveAs(ExtractFilePath(Application.ExeName) +
+      'Export.xlsx');
+    ExcelApp.ActiveWorkbook.Close(False);
+    ExcelApp.Quit;
+
+  finally
+    Query.Free;
+    Conn.Free;
+
+  end;
+end;
+
+
+
+  procedure Tform_dashboard.btnTabelAnggotaClick(Sender: TObject);
+  begin
+    pageControlBottom.ActivePage := tabInfoAnggota
+  end;
+
+  procedure Tform_dashboard.FormShow(Sender: TObject);
+  begin
+    try
+      tabInfoHome.TabVisible := False;
+      tabInfoAnggota.TabVisible := False;
+      tabInfoFilm.TabVisible := False;
+      tabInfoPinjam.TabVisible := False;
+      pageControlTop.ActivePage := tabAnggota;
+      pageControlBottom.ActivePage := tabInfoHome;
+
+      with myDataModule do
+      begin
+        zConnect.HostName := 'localhost';
+        zConnect.Port := 3306;
+        zConnect.User := 'rangga';
+        zConnect.Password := 'rangga';
+        zConnect.Database := 'rentaldvd';
+        zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
+          'libmysql.dll';
+        zConnect.Connected := True;
+        queryAnggota_.Active := True;
+      end;
+    except
+
+    end;
+  end;
+
+  procedure Tform_dashboard.gridAnggotaDblClick(Sender: TObject);
+  begin
+    with form_anggota do
+    begin
+      txtKode.Text := myDataModule.queryAnggota_id.AsString;
+      txtNama.Text := myDataModule.queryAnggota_nama.AsString;
+      txtPekerjaan.Text := myDataModule.queryAnggota_pekerjaan.AsString;
+      txtAlamat.Text := myDataModule.queryAnggota_alamat.AsString;
+      txtHP.Text := myDataModule.queryAnggota_telp.AsString;
+      ShowModal;
+    end;
+  end;
+
+  procedure Tform_dashboard.txtSearchChange(Sender: TObject);
+  begin
+    with myDataModule do
+    begin
+      queryAnggota_.SQL.Clear;
+      queryAnggota_.SQL.Text := 'SELECT * FROM anggota WHERE nama LIKE ' +
+        QuotedStr('%' + txtSearch.Text + '%') + ' ORDER BY nama';
+      queryAnggota_.Open;
+    end;
+  end;
+
+end.

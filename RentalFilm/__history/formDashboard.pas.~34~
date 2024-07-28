@@ -1,0 +1,114 @@
+unit formDashboard;
+
+interface
+
+uses Data.DB, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Controls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Forms, Vcl.Graphics, System.Classes, System.SysUtils ;
+  
+
+type
+  Tform_dashboard = class(TForm)
+    pageControlTop: TPageControl;
+    tabAnggota: TTabSheet;
+    tabFilm: TTabSheet;
+    tabPinjam: TTabSheet;
+    stsBar: TStatusBar;
+    btnAnggota: TSpeedButton;
+    btnLaporanAnggota: TSpeedButton;
+    btnLaporanFilm: TSpeedButton;
+    btnFilm: TSpeedButton;
+    pageControlBottom: TPageControl;
+    tabInfoHome: TTabSheet;
+    tabInfoAnggota: TTabSheet;
+    tabInfoFilm: TTabSheet;
+    tabInfoPinjam: TTabSheet;
+    panelHome: TPanel;
+    btnTabelAnggota: TSpeedButton;
+    gridAnggota: TDBGrid;
+    lblSearch: TLabel;
+    txtSearch: TEdit;
+
+    procedure btnAnggotaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnTabelAnggotaClick(Sender: TObject);
+    procedure txtSearchChange(Sender: TObject);
+    procedure gridAnggotaDblClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_dashboard: Tform_dashboard;
+
+implementation
+
+uses
+  formAnggota, dataModulDB;
+
+{$R *.dfm}
+
+procedure Tform_dashboard.btnAnggotaClick(Sender: TObject);
+begin
+  form_anggota.Show;
+end;
+
+procedure Tform_dashboard.btnTabelAnggotaClick(Sender: TObject);
+begin
+  pageControlBottom.ActivePage := tabInfoAnggota
+end;
+
+procedure Tform_dashboard.FormShow(Sender: TObject);
+begin
+  try
+    tabInfoHome.TabVisible := False;
+    tabInfoAnggota.TabVisible := False;
+    tabInfoFilm.TabVisible := False;
+    tabInfoPinjam.TabVisible := False;
+    pageControlTop.ActivePage := tabAnggota;
+    pageControlBottom.ActivePage := tabInfoHome;
+
+    with myDataModule do
+    begin
+      zConnect.HostName := 'localhost';
+      zConnect.Port := 3306;
+      zConnect.User := 'rangga';
+      zConnect.Password := 'rangga';
+      zConnect.Database := 'rentaldvd';
+      zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
+        'libmysql.dll';
+      zConnect.Connected := True;
+      queryAnggota_.Active := True;
+    end;
+  except
+
+  end;
+end;
+
+procedure Tform_dashboard.gridAnggotaDblClick(Sender: TObject);
+begin
+  with form_anggota do
+  begin
+    txtKode.Text := myDataModule.queryAnggota_id.AsString;
+    txtNama.Text := myDataModule.queryAnggota_nama.AsString;
+    txtPekerjaan.Text := myDataModule.queryAnggota_pekerjaan.AsString;
+    txtAlamat.Text := myDataModule.queryAnggota_alamat.AsString;
+    txtHP.Text := myDataModule.queryAnggota_telp.AsString;
+    ShowModal;
+  end;
+end;
+
+procedure Tform_dashboard.txtSearchChange(Sender: TObject);
+begin
+  with myDataModule do
+  begin
+    queryAnggota_.SQL.Clear;
+    queryAnggota_.SQL.Text := 'SELECT * FROM anggota WHERE nama LIKE ' +
+      QuotedStr('%' + txtSearch.Text + '%') + ' ORDER BY nama';
+    queryAnggota_.Open;
+  end;
+end;
+
+end.

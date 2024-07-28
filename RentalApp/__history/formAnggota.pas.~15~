@@ -1,0 +1,141 @@
+unit formAnggota;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TForm_Anggota = class(TForm)
+    panelAnggota: TPanel;
+    lblKodeAnggota: TLabel;
+    txtKode: TEdit;
+    lblNama: TLabel;
+    lblPekerjaan: TLabel;
+    txtPekerjaan: TEdit;
+    lblAlamat: TLabel;
+    txtAlamat: TEdit;
+    lblHP: TLabel;
+    txtHP: TEdit;
+    txtNama: TEdit;
+    btnSave: TButton;
+    btnEdit: TButton;
+    btnDelete: TButton;
+    procedure TekanEnter(Sender: TObject; var Key: Char);
+    procedure btnSaveClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_Anggota: TForm_Anggota;
+
+implementation
+
+{$R *.dfm}
+
+uses dataModuleDB;
+
+procedure TForm_Anggota.btnSaveClick(Sender: TObject);
+begin
+  if Trim(txtKode.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Kode Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtKode.SetFocus;
+  end
+  else if Trim(txtNama.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Nama Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtNama.SetFocus;
+  end
+  else if Trim(txtPekerjaan.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Pekerjaan Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtPekerjaan.SetFocus;
+  end
+  else if Trim(txtAlamat.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Alamat Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtAlamat.SetFocus;
+
+  end
+  else if Trim(txtHP.Text) = '' then
+  begin
+    beep;
+    MessageDlg('No. HP Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtHP.SetFocus;
+  end
+  else
+  begin
+    with DataModuleMySQL do
+    begin
+    // Simpan Data
+      // Cara 1:
+      // zQueryAnggota.Append;
+      // zQueryAnggotaid.AsString := txtKode.Text;
+      // zQueryAnggotanama.AsString := txtNama.Text;
+      // zQueryAnggotapekerjaan.AsString := txtPekerjaan.Text;
+      // zQueryAnggotaalamat.AsString := txtAlamat.Text;
+      // zQueryAnggotatelp.AsString := txtHP.Text;
+      // zQueryAnggota.Post;
+
+      // Cara 2:
+      zQueryAnggota.Append;
+      zQueryAnggota.FieldByName('id').AsString := txtKode.Text;
+      zQueryAnggota.FieldByName('nama').AsString := txtNama.Text;
+      zQueryAnggota.FieldByName('pekerjaan').AsString := txtPekerjaan.Text;
+      zQueryAnggota.FieldByName('alamat').AsString := txtAlamat.Text;
+      zQueryAnggota.FieldByName('telp').AsString := txtHP.Text;
+      zQueryAnggota.Post;
+
+      // Cara 3:
+       zQueryAnggota.Append;
+      zQueryAnggota.Fields[0].AsString := txtKode.Text;
+      zQueryAnggota.Fields[1].AsString := txtNama.Text;
+      zQueryAnggota.Fields[2].AsString := txtPekerjaan.Text;
+      zQueryAnggota.Fields[3].AsString := txtAlamat.Text;
+      zQueryAnggota.Fields[4].AsString := txtHP.Text;
+      zQueryAnggota.Post;
+
+
+      MessageDlg('Data berhasil disimpan', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0)
+    end;
+
+  end;
+
+end;
+
+procedure TForm_Anggota.TekanEnter(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+  begin
+    if Sender = txtKode then
+      txtNama.SetFocus;
+    if Sender = txtNama then
+      txtPekerjaan.SetFocus;
+    if Sender = txtPekerjaan then
+      txtAlamat.SetFocus;
+    if Sender = txtAlamat then
+      txtHP.SetFocus;
+    if Sender = txtHP then
+      txtKode.SetFocus;
+
+  end;
+
+end;
+
+end.

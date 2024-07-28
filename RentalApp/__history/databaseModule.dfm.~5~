@@ -1,0 +1,20 @@
+object myDataModule: TmyDataModule
+  Height = 547
+  Width = 884
+  object zConnectMySQL: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    Properties.Strings = (
+      'RawStringEncoding=DB_CP')
+    DisableSavepoints = False
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'rentaldvd'
+    User = 'root'
+    Password = ''
+    Protocol = 'mysql'
+    LibraryLocation = 'D:\up2github\Delphi_Console\RentalApp\Win32\Debug\libmysql.dll'
+    Left = 333
+    Top = 49
+  end
+end

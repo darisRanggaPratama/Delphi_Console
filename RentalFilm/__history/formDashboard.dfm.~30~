@@ -1,0 +1,196 @@
+object form_dashboard: Tform_dashboard
+  Left = 0
+  Top = 0
+  Caption = 'Dashboard'
+  ClientHeight = 688
+  ClientWidth = 1114
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  OnShow = FormShow
+  TextHeight = 15
+  object pageControlTop: TPageControl
+    Left = 0
+    Top = 0
+    Width = 1114
+    Height = 149
+    ActivePage = tabAnggota
+    Align = alTop
+    TabOrder = 0
+    ExplicitWidth = 1110
+    object tabAnggota: TTabSheet
+      Caption = 'Data Anggota'
+      object btnAnggota: TSpeedButton
+        Left = 46
+        Top = 50
+        Width = 119
+        Height = 30
+        Cursor = crHandPoint
+        Caption = 'Tambah Data'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnClick = btnAnggotaClick
+      end
+      object btnLaporanAnggota: TSpeedButton
+        Left = 230
+        Top = 50
+        Width = 187
+        Height = 30
+        Cursor = crHandPoint
+        Caption = 'Laporan Data Anggota'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btnTabelAnggota: TSpeedButton
+        Left = 497
+        Top = 50
+        Width = 142
+        Height = 30
+        Cursor = crHandPoint
+        Caption = 'Tabel Anggota'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnClick = btnTabelAnggotaClick
+      end
+    end
+    object tabFilm: TTabSheet
+      Caption = 'Data Film'
+      ImageIndex = 1
+      object btnLaporanFilm: TSpeedButton
+        Left = 229
+        Top = 50
+        Width = 187
+        Height = 30
+        Cursor = crHandPoint
+        Caption = 'Laporan Data Film'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btnFilm: TSpeedButton
+        Left = 46
+        Top = 50
+        Width = 119
+        Height = 30
+        Cursor = crHandPoint
+        Caption = 'Tambah Film'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object tabPinjam: TTabSheet
+      Caption = 'Transaksi Pinjam'
+      ImageIndex = 2
+    end
+  end
+  object stsBar: TStatusBar
+    Left = 0
+    Top = 669
+    Width = 1114
+    Height = 19
+    Panels = <
+      item
+        Text = 'Aplikasi Rental Film'
+        Width = 200
+      end
+      item
+        Text = 'Delphi Community Edition'
+        Width = 50
+      end>
+    ExplicitTop = 668
+    ExplicitWidth = 1110
+  end
+  object pageControlBottom: TPageControl
+    Left = 0
+    Top = 149
+    Width = 1114
+    Height = 520
+    ActivePage = tabInfoAnggota
+    Align = alClient
+    TabOrder = 2
+    object tabInfoHome: TTabSheet
+      Caption = 'InfoHome'
+      object panelHome: TPanel
+        Left = 0
+        Top = 0
+        Width = 1106
+        Height = 490
+        Align = alClient
+        BevelOuter = bvLowered
+        Caption = 'Aplikasi Rental Film'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -27
+        Font.Name = 'JetBrains Mono NL'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        ExplicitLeft = 325
+        ExplicitTop = 67
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
+    end
+    object tabInfoAnggota: TTabSheet
+      Caption = 'InfoAnggota'
+      ImageIndex = 1
+      object gridAnggota: TDBGrid
+        Left = 0
+        Top = 70
+        Width = 1106
+        Height = 420
+        Align = alCustom
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        DataSource = myDataModule.sourceAnggota
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+    end
+    object tabInfoFilm: TTabSheet
+      Caption = 'InfoFilm'
+      ImageIndex = 2
+    end
+    object tabInfoPinjam: TTabSheet
+      Caption = 'InfoPinjam'
+      ImageIndex = 3
+    end
+  end
+end

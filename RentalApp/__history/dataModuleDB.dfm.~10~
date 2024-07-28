@@ -1,0 +1,65 @@
+object DataModuleMySQL: TDataModuleMySQL
+  Height = 273
+  Width = 334
+  object zConnect: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    Properties.Strings = (
+      'RawStringEncoding=DB_CP')
+    Connected = True
+    DisableSavepoints = False
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'rentaldvd'
+    User = 'rangga'
+    Password = 'rangga'
+    Protocol = 'mysql'
+    LibraryLocation = 'D:\up2github\Delphi_Console\RentalApp\Win32\Debug\libmysql.dll'
+    Left = 55
+    Top = 12
+  end
+  object zQueryAnggota: TZQuery
+    Connection = zConnect
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM anggota ORDER BY nama ASC;')
+    Params = <>
+    Left = 59
+    Top = 87
+    object zQueryAnggotaid: TZUnicodeStringField
+      DisplayLabel = 'Kode'
+      DisplayWidth = 10
+      FieldName = 'id'
+      Required = True
+      Size = 5
+    end
+    object zQueryAnggotanama: TZUnicodeStringField
+      DisplayLabel = 'Nama Anggota'
+      DisplayWidth = 50
+      FieldName = 'nama'
+      Required = True
+      Size = 100
+    end
+    object zQueryAnggotapekerjaan: TZUnicodeCLobField
+      FieldName = 'pekerjaan'
+      Required = True
+      BlobType = ftVariant
+    end
+    object zQueryAnggotaalamat: TZUnicodeCLobField
+      FieldName = 'alamat'
+      Required = True
+      BlobType = ftVariant
+    end
+    object zQueryAnggotatelp: TZUnicodeStringField
+      DisplayLabel = 'Telepon'
+      FieldName = 'telp'
+      Required = True
+      Size = 15
+    end
+  end
+  object dataSourceAnggota: TDataSource
+    DataSet = zQueryAnggota
+    Left = 56
+    Top = 151
+  end
+end

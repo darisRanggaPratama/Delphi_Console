@@ -1,0 +1,39 @@
+program Basic_Case;
+
+{$APPTYPE CONSOLE}
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+var
+  angka: Integer;
+  nilai: char;
+
+begin
+
+    Write('Input nilai (0 s/d 100): ');
+    Readln(angka);
+
+    if (angka < 0) and (angka > 100) then
+    begin
+      Writeln('Error: Hanya menerima angka 0 s/d 100')
+    end
+    else
+    begin
+      case angka of
+        90..100: nilai := 'A';
+        80..89:  nilai := 'B';
+        70..79:  nilai := 'C';
+        60..69:  nilai := 'D';
+        50..59:  nilai := 'E';
+        0..49:   nilai := 'F';
+      else
+        nilai := '?';  // Ini tidak akan pernah terjadi karena sudah diverifikasi sebelumnya
+    end;
+
+
+  Write('Tekan Enter untuk keluar');
+  Readln;
+
+end.

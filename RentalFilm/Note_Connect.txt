@@ -1,0 +1,52 @@
+Dbo -> Adoconnection, adoTAble dll
+FireDac dll
+Zeos
+
+Table, Query Table
+
+Kode simpan, ubah, hapus
+1. SQL
+2. Non SQL
+
+Non SQL: 
+1. FieldByName => field -> table MySQL
+2. Fields => urutan pada tabel
+3. Variant
+4. List langsung dari Query
+
+      // Simpan Data
+      // Cara 1: List langsung dari Query (Lebih aman)
+      zQueryAnggota.Append;
+      zQueryAnggotaid.AsString := txtKode.Text;
+      zQueryAnggotanama.AsString := txtNama.Text;
+      zQueryAnggotapekerjaan.AsString := txtPekerjaan.Text;
+      zQueryAnggotaalamat.AsString := txtAlamat.Text;
+      zQueryAnggotatelp.AsString := txtHP.Text;
+      zQueryAnggota.Post;
+
+      // Cara 2: FieldByName
+      // zQueryAnggota.Append;
+      // zQueryAnggota.FieldByName('id').AsString := txtKode.Text;
+      // zQueryAnggota.FieldByName('nama').AsString := txtNama.Text;
+      // zQueryAnggota.FieldByName('pekerjaan').AsString := txtPekerjaan.Text;
+      // zQueryAnggota.FieldByName('alamat').AsString := txtAlamat.Text;
+      // zQueryAnggota.FieldByName('telp').AsString := txtHP.Text;
+      // zQueryAnggota.Post;
+
+      // Cara 3: Fields
+      // zQueryAnggota.Append;
+      // zQueryAnggota.Fields[0].AsString := txtKode.Text;
+      // zQueryAnggota.Fields[1].AsString := txtNama.Text;
+      // zQueryAnggota.Fields[2].AsString := txtPekerjaan.Text;
+      // zQueryAnggota.Fields[3].AsString := txtAlamat.Text;
+      // zQueryAnggota.Fields[4].AsString := txtHP.Text;
+      // zQueryAnggota.Post;
+
+      // Cara 4: Variant
+      // zQueryAnggota.Append;
+      // zQueryAnggota.FieldValues['id'] := txtKode.Text;
+      // zQueryAnggota.FieldValues['nama'] := txtNama.Text;
+      // zQueryAnggota.FieldValues['pekerjaan'] := txtPekerjaan.Text;
+      // zQueryAnggota.FieldValues['alamat'] := txtAlamat.Text;
+      // zQueryAnggota.FieldValues['telp'] := txtHP.Text;
+      // zQueryAnggota.Post;

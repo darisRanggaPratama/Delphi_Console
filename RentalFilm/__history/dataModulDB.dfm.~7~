@@ -1,0 +1,59 @@
+object myDataModule: TmyDataModule
+  Height = 480
+  Width = 640
+  object zConnect: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    Properties.Strings = (
+      'RawStringEncoding=DB_CP')
+    Connected = True
+    DisableSavepoints = False
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'rentaldvd'
+    User = 'rangga'
+    Password = 'rangga'
+    Protocol = 'mysql'
+    LibraryLocation = 'D:\up2github\Delphi_Console\RentalFilm\Win32\Debug\libmysql.dll'
+    Left = 117
+    Top = 28
+  end
+  object queryAnggota_: TZQuery
+    Connection = zConnect
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM anggota ORDER BY id ASC')
+    Params = <>
+    Left = 109
+    Top = 133
+    object queryAnggota_id: TZUnicodeStringField
+      FieldName = 'id'
+      Required = True
+      Size = 5
+    end
+    object queryAnggota_nama: TZUnicodeStringField
+      FieldName = 'nama'
+      Required = True
+      Size = 100
+    end
+    object queryAnggota_pekerjaan: TZUnicodeStringField
+      FieldName = 'pekerjaan'
+      Required = True
+    end
+    object queryAnggota_alamat: TZUnicodeStringField
+      FieldName = 'alamat'
+      Required = True
+      Size = 50
+    end
+    object queryAnggota_telp: TZUnicodeStringField
+      FieldName = 'telp'
+      Required = True
+      Size = 15
+    end
+  end
+  object sourceAnggota: TDataSource
+    DataSet = queryAnggota_
+    Left = 108
+    Top = 223
+  end
+end

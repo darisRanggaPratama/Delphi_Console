@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/07/17 08:19:09.355,D:\up2github\Delphi_Console\Basic_if-then-else\SelectionIF.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2024/07/17 08:19:09.000.355,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\Basic_if-then-else\SelectionIF.dproj</Transaction>
   </Transactions>
 </BorlandProject>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/07/18 21:07:55.000.172,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/18 23:31:56.000.111,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\RentalApp\appRental.dfm</Transaction>
+    <Transaction>2024/07/18 23:31:56.000.111,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\RentalApp\appRental.pas</Transaction>
+    <Transaction>2024/07/18 23:32:17.000.547,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\RentalApp\RentalDVDapp.dproj</Transaction>
+    <Transaction>2024/07/19 00:52:03.000.322,=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/19 00:52:51.000.133,D:\up2github\Delphi_Console\RentalApp\Unit1.dfm=D:\up2github\Delphi_Console\RentalApp\formAnggota.dfm</Transaction>
+    <Transaction>2024/07/19 00:52:51.000.133,D:\up2github\Delphi_Console\RentalApp\Unit1.pas=D:\up2github\Delphi_Console\RentalApp\formAnggota.pas</Transaction>
+    <Transaction>2024/07/19 08:02:43.000.764,=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/19 08:03:26.000.982,D:\up2github\Delphi_Console\RentalApp\databaseModule.dfm=D:\up2github\Delphi_Console\RentalApp\Unit1.dfm</Transaction>
+    <Transaction>2024/07/19 08:03:26.000.982,D:\up2github\Delphi_Console\RentalApp\databaseModule.pas=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/22 14:30:39.000.686,D:\up2github\Delphi_Console\RentalApp\databaseModule.pas=</Transaction>
+    <Transaction>2024/07/22 14:31:07.000.033,=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/22 14:31:54.000.964,D:\up2github\Delphi_Console\RentalApp\Unit1.dfm=D:\up2github\Delphi_Console\RentalApp\dbModule.dfm</Transaction>
+    <Transaction>2024/07/22 14:31:54.000.964,D:\up2github\Delphi_Console\RentalApp\Unit1.pas=D:\up2github\Delphi_Console\RentalApp\dbModule.pas</Transaction>
+    <Transaction>2024/07/22 17:05:38.000.153,D:\up2github\Delphi_Console\RentalApp\dbModule.pas=</Transaction>
+    <Transaction>2024/07/22 17:08:53.000.393,=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/22 17:09:33.000.410,D:\up2github\Delphi_Console\RentalApp\dataModuleDB.pas=D:\up2github\Delphi_Console\RentalApp\Unit1.pas</Transaction>
+    <Transaction>2024/07/22 17:09:33.000.410,D:\up2github\Delphi_Console\RentalApp\dataModuleDB.dfm=D:\up2github\Delphi_Console\RentalApp\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

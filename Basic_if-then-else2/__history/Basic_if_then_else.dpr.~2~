@@ -1,0 +1,34 @@
+program Basic_if_then_else;
+
+{$APPTYPE CONSOLE}
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+var
+  angka: Double;
+  nilai: char;
+
+begin
+  try
+    Write('Input nilai (0 s/d 100): ');
+    Readln(angka);
+    begin
+    if (angka < 0) and (angka > 100) then Writeln('Error: Hanya menerima angka 0 s/d 100')
+    else if (angka >= 90) and (angka <= 100) then nilai := 'A'
+    else if (angka >= 80) and (angka < 90) then nilai := 'B'
+    else if (angka >= 70) and (angka < 80) then nilai := 'C'
+    else if (angka >= 60) and (angka < 70) then nilai := 'D'
+    else if (angka >= 50) and (angka < 60) then nilai := 'E'
+    else nilai := 'F';
+
+    Writeln('Angka: ', angka, ' Nilai: ', nilai);
+    end;
+
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+
+end.

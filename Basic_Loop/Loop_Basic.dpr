@@ -1,0 +1,69 @@
+program Loop_Basic;
+
+{$APPTYPE CONSOLE}
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+function PowerWhile(Base, Exponent: Integer): Integer;
+var
+  number, I: Integer;
+begin
+  number := 1;
+  I := 0;
+  while I < Exponent do
+  begin
+    number := number * Base;
+    I := I +1; // Cara lain: Inc(I);
+  end;
+  PowerWhile := number;
+end;
+
+function PowerRepeat(Base, Exponent: Integer): Integer;
+var
+  number, I: Integer;
+begin
+  number := 1;
+  I := 0;
+  repeat
+    number := number * Base;
+    Inc(I); // Cara lain: I := I +1;
+  until I = Exponent;
+  PowerRepeat := number;
+end;
+
+function PowerFor(Base, Exponent: Integer): Integer;
+var
+  number, I: Integer;
+begin
+  number := 1;
+  for I := 1 to Exponent do
+  begin
+    number := number * Base;
+  end;
+  PowerFor := number;
+end;
+
+var
+  Base, Exponent: Integer;
+
+begin
+  try
+    Write('Masukkan angka dasar: ');
+    ReadLn(Base);
+    Write('Masukkan pangkat: ');
+    ReadLn(Exponent);
+
+    WriteLn('Hasil menggunakan While loop: ', PowerWhile(Base, Exponent));
+    WriteLn('Hasil menggunakan Repeat loop: ', PowerRepeat(Base, Exponent));
+    WriteLn('Hasil menggunakan For loop: ', PowerFor(Base, Exponent));
+
+    WriteLn('Tekan Enter untuk keluar...');
+    ReadLn;
+  except
+    on E: Exception do
+      WriteLn(E.ClassName, ': ', E.Message);
+  end;
+
+end.

@@ -1,0 +1,14 @@
+program RentalDVDapp;
+
+uses
+  Vcl.Forms,
+  appRental in 'appRental.pas' {formDashboard};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TformDashboard, formDashboard);
+  Application.Run;
+end.

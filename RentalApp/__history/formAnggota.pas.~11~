@@ -1,0 +1,104 @@
+unit formAnggota;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TForm_Anggota = class(TForm)
+    panelAnggota: TPanel;
+    lblKodeAnggota: TLabel;
+    txtKode: TEdit;
+    lblNama: TLabel;
+    lblPekerjaan: TLabel;
+    txtPekerjaan: TEdit;
+    lblAlamat: TLabel;
+    txtAlamat: TEdit;
+    lblHP: TLabel;
+    txtHP: TEdit;
+    txtNama: TEdit;
+    btnSave: TButton;
+    btnEdit: TButton;
+    btnDelete: TButton;
+    procedure TekanEnter(Sender: TObject; var Key: Char);
+    procedure btnSaveClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_Anggota: TForm_Anggota;
+
+implementation
+
+{$R *.dfm}
+
+uses dataModuleDB;
+
+procedure TForm_Anggota.btnSaveClick(Sender: TObject);
+begin
+  if Trim(txtKode.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Kode Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtKode.SetFocus;
+  end
+  else if Trim(txtNama.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Nama Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtNama.SetFocus;
+  end
+  else if Trim(txtPekerjaan.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Pekerjaan Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtPekerjaan.SetFocus;
+  end
+  else if Trim(txtAlamat.Text) = '' then
+  begin
+    beep;
+    MessageDlg('Alamat Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtAlamat.SetFocus;
+
+  end
+  else if Trim(txtHP.Text) = '' then
+  begin
+    beep;
+    MessageDlg('No. HP Anggota wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtHP.SetFocus;
+
+  end;
+
+end;
+
+procedure TForm_Anggota.TekanEnter(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+  begin
+    if Sender = txtKode then
+      txtNama.SetFocus;
+    if Sender = txtNama then
+      txtPekerjaan.SetFocus;
+    if Sender = txtPekerjaan then
+      txtAlamat.SetFocus;
+    if Sender = txtAlamat then
+      txtHP.SetFocus;
+    if Sender = txtHP then
+      txtKode.SetFocus;
+
+  end;
+
+end;
+
+end.

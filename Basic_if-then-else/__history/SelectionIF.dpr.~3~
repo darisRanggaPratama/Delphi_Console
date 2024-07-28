@@ -1,0 +1,44 @@
+program SelectionIF;
+
+{$APPTYPE CONSOLE}
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+var
+  angka: Integer;
+  nilai: char;
+
+begin
+  try
+    Write('Input nilai');
+    Readln(angka);
+
+    if (angka >= 90) and (angka <= 100) then
+      nilai := 'A'
+    else if (angka >= 80) and (angka <= 89) then
+      nilai := 'B'
+    else if (angka >= 70) and (angka <= 79) then
+      nilai := 'C'
+    else if (angka >= 60) and (angka <= 69) then
+      nilai := 'D'
+    else if (angka >= 50) and (angka <= 59) then
+      nilai := 'E'
+    else if (angka >= 0) and (angka <= 49) then
+      nilai := 'F'
+    else
+
+      Writeln('Nilai tidak valid. Silakan masukkan nilai yang benar.');
+    Readln;
+    exit;
+
+    Writeln('Nilai: ', angka, ' Nilai: ', nilai);
+    Readln;
+
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+
+end.

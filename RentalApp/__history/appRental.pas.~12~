@@ -1,0 +1,61 @@
+unit appRental;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.ComCtrls;
+
+type
+  TformDashboard = class(TForm)
+    pageData: TPageControl;
+    tabAnggota: TTabSheet;
+    tabFilm: TTabSheet;
+    tabPinjam: TTabSheet;
+    statusBarApp: TStatusBar;
+    btnAnggota: TSpeedButton;
+    btnLaporAnggota: TSpeedButton;
+    btnFilm: TSpeedButton;
+    btnLaporFilm: TSpeedButton;
+    page_control: TPageControl;
+    InfoHome: TTabSheet;
+    InfoAnggota: TTabSheet;
+    InfoFilm: TTabSheet;
+    InfoPinjam: TTabSheet;
+    panelHome: TPanel;
+    procedure btnAnggotaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formDashboard: TformDashboard;
+
+implementation
+
+{$R *.dfm}
+
+uses formAnggota;
+
+procedure TformDashboard.btnAnggotaClick(Sender: TObject);
+begin
+  Form_Anggota.Show;
+end;
+
+procedure TformDashboard.FormShow(Sender: TObject);
+begin
+  InfoHome.TabVisible := False;
+  InfoAnggota.TabVisible := False;
+  InfoFilm.TabVisible := False;
+  InfoPinjam.TabVisible := False;
+  page_control.ActivePage := tabAnggota;
+  page_control.ActivePage := InfoHome;
+
+end;
+
+end.

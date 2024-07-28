@@ -1,0 +1,14 @@
+program RentalFilmApp;
+
+uses
+  Vcl.Forms,
+  formDashboard in 'formDashboard.pas' {form_dashboard};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tform_dashboard, form_dashboard);
+  Application.Run;
+end.
