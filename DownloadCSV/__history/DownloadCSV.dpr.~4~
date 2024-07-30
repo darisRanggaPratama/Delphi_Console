@@ -1,0 +1,14 @@
+program DownloadCSV;
+
+uses
+  Vcl.Forms,
+  ExportCSV in 'ExportCSV.pas' {form_export};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tform_export, form_export);
+  Application.Run;
+end.

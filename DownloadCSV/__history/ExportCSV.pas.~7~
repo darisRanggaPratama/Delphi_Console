@@ -1,0 +1,104 @@
+unit ExportCSV;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
+  ZConnection;
+
+type
+  Tform_export = class(TForm)
+    btnExport: TButton;
+    zConnect: TZConnection;
+    queryAnggota: TZQuery;
+    dataSources: TDataSource;
+    procedure btnExportClick(Sender: TObject);
+  private
+    procedure ExportDataToCSV(const FileName: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  form_export: Tform_export;
+
+implementation
+
+
+{$R *.dfm}
+
+procedure Tform_export.btnExportClick(Sender: TObject);
+begin
+  // Set up the connection
+  zConnect.HostName := 'localhost';
+  zConnect.Port := 3306;
+  zConnect.User := 'rangga';
+  zConnect.Password := 'rangga';
+  zConnect.Database := 'rentaldvd';
+  zConnect.Protocol := 'mysql';
+  zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
+    '\library\libmysql.dll';
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    queryAnggota.SQL.Clear;
+    queryAnggota.SQL.Text :=
+      'SELECT id, nama, pekerjaan, alamat, telp FROM anggota';
+
+    if queryAnggota.SQL.Text = '' then
+      raise Exception.Create('SQL Query is Empty');
+
+    queryAnggota.Open;
+
+    // Export data to CSV
+    ExportDataToCSV(ExtractFilePath(Application.ExeName) +
+      '\output\anggota.csv');
+    ShowMessage('Data exported successfully!');
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure Tform_export.ExportDataToCSV(const FileName: string);
+var
+  CSVFile: TextFile;
+  i: Integer;
+  Line: string;
+begin
+  AssignFile(CSVFile, FileName);
+  Rewrite(CSVFile);
+
+  try
+    // Write column headers
+    Line := 'id;nama;pekerjaan;alamat;telp';
+    Writeln(CSVFile, Line);
+
+    // Write data rows
+    queryAnggota.First;
+    while not queryAnggota.Eof do
+    begin
+      Line := '';
+      for i := 0 to queryAnggota.FieldCount - 1 do
+      begin
+        Line := Line + queryAnggota.Fields[i].AsString;
+        if i < queryAnggota.FieldCount - 1 then
+          Line := Line + ';';
+      end;
+      Writeln(CSVFile, Line);
+      queryAnggota.Next;
+    end;
+
+  finally
+    CloseFile(CSVFile);
+  end;
+end;
+
+end.

@@ -12,6 +12,7 @@ object form_download: Tform_download
   Font.Style = []
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object btnExportToCSV: TButton
     Left = 204

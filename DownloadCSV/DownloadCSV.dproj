@@ -98,8 +98,12 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Download.pas">
-            <Form>form_download</Form>
+        <DCCReference Include="ExportCSV.pas">
+            <Form>form_export</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ImportCSV.pas">
+            <Form>form_import</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

@@ -3,7 +3,8 @@ unit Download;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.FMTBcd, Data.DB,
   Data.SqlExpr;
 
@@ -16,6 +17,7 @@ type
     savesDialog: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure btnExportToCSVClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,17 +29,21 @@ var
 
 implementation
 
+uses
+dataModule;
 
 {$R *.dfm}
 
 procedure Tform_download.FormCreate(Sender: TObject);
 begin
 
- // Setting up SQLConnection
+  // Setting up SQLConnection
   sqlConnect.DriverName := 'db32Local';
- sqlConnect.GetDriverFunc := 'getSQLDriverMYSQL';
- sqlConnect.LibraryName := 'dbxmys.dll';
-  sqlConnect.VendorLib := ExtractFilePath(Application.ExeName) + '\library\libmysql.dll';
+  sqlConnect.GetDriverFunc := 'getSQLDriverMYSQL';
+  sqlConnect.LibraryName := 'dbxmys.dll';
+  sqlConnect.VendorLib := ExtractFilePath(Application.ExeName) +
+    '\library\libmysql.dll';
+
   sqlConnect.Params.Values['HostName'] := 'localhost';
   sqlConnect.Params.Values['Database'] := 'rentaldvd';
   sqlConnect.Params.Values['User_Name'] := 'rangga';
@@ -49,6 +55,22 @@ begin
   sqlQuery.SQLConnection := sqlConnect;
   sqlQuery.SQL.Text := 'SELECT id, nama, pekerjaan, alamat, telp FROM anggota';
 
+end;
+
+procedure Tform_download.FormShow(Sender: TObject);
+begin
+       with myDataModule do
+    begin
+      zConnect.HostName := 'localhost';
+      zConnect.Port := 3306;
+      zConnect.User := 'rangga';
+      zConnect.Password := 'rangga';
+      zConnect.Database := 'rentaldvd';
+      zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
+        '\library\libmysql.dll';
+      zConnect.Connected := True;
+      queryAnggota.Active := True;
+    end;
 end;
 
 procedure Tform_download.btnExportToCSVClick(Sender: TObject);
@@ -64,21 +86,21 @@ begin
 
     // Write the header
     Line := '';
-    for i := 0 to  sqlQuery.FieldCount - 1 do
-      Line := Line +  sqlQuery.Fields[i].FieldName + ';';
+    for i := 0 to sqlQuery.FieldCount - 1 do
+      Line := Line + sqlQuery.Fields[i].FieldName + ';';
     SetLength(Line, Length(Line) - 1); // remove last semicolon
     Writeln(CSVFile, Line);
 
     // Write the data
     sqlQuery.Open;
-    while not  sqlQuery.Eof do
+    while not sqlQuery.Eof do
     begin
       Line := '';
-      for i := 0 to  sqlQuery.FieldCount - 1 do
-        Line := Line +  sqlQuery.Fields[i].AsString + ';';
+      for i := 0 to sqlQuery.FieldCount - 1 do
+        Line := Line + sqlQuery.Fields[i].AsString + ';';
       SetLength(Line, Length(Line) - 1); // remove last semicolon
       Writeln(CSVFile, Line);
-       sqlQuery.Next;
+      sqlQuery.Next;
     end;
 
     CloseFile(CSVFile);
@@ -87,6 +109,5 @@ begin
     ShowMessage('Data telah diekspor ke file CSV.');
   end;
 end;
-
 
 end.

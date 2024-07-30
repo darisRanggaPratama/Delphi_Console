@@ -1,0 +1,122 @@
+unit ImportCSV;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection, Vcl.StdCtrls,
+  System.IOUtils;
+
+type
+  Tform_import = class(TForm)
+    btnImport: TButton;
+    zConnect: TZConnection;
+    queryAnggota: TZQuery;
+    procedure btnImportClick(Sender: TObject);
+  private
+    procedure ImportCSVToMySQL(const FileName: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  form_import: Tform_import;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure Tform_import.btnImportClick(Sender: TObject);
+var
+  ImportPath: string;
+begin
+  ImportPath := ExtractFilePath(Application.ExeName) + '\import\anggota.csv';
+
+  if not FileExists(ImportPath) then
+  begin
+    ShowMessage('File CSV tidak ditemukan: ' + ImportPath);
+    Exit;
+  end;
+
+  // Set up the connection
+  zConnect.HostName := 'localhost';
+  zConnect.Port := 3306;
+  zConnect.User := 'rangga';
+  zConnect.Password := 'rangga';
+  zConnect.Database := 'rentaldvd';
+  zConnect.Protocol := 'mysql';
+  zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) + '\library\libmysql.dll';
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    ImportCSVToMySQL(ImportPath);
+    ShowMessage('Data imported successfully!');
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure Tform_import.ImportCSVToMySQL(const FileName: string);
+var
+  CSVFile: TextFile;
+  Line, SQLInsert: string;
+  Fields: TArray<string>;
+  IsFirstLine: Boolean;
+begin
+  AssignFile(CSVFile, FileName);
+  Reset(CSVFile);
+  IsFirstLine := True;
+
+  try
+    queryAnggota.Connection := zConnect;
+
+    while not Eof(CSVFile) do
+    begin
+      ReadLn(CSVFile, Line);
+
+      if IsFirstLine then
+      begin
+        IsFirstLine := False;
+        Continue; // Skip header line
+      end;
+
+      Fields := Line.Split([';']);
+
+      if Length(Fields) <> 5 then
+      begin
+        ShowMessage('Invalid CSV format in line: ' + Line);
+        Continue;
+      end;
+
+      SQLInsert :=
+        'INSERT INTO anggota (id, nama, pekerjaan, alamat, telp) VALUES (' +
+        QuotedStr(Fields[0]) + ', ' + QuotedStr(Fields[1]) + ', ' +
+        QuotedStr(Fields[2]) + ', ' + QuotedStr(Fields[3]) + ', ' +
+        QuotedStr(Fields[4]) + ')';
+
+      queryAnggota.SQL.Text := SQLInsert;
+
+      try
+        queryAnggota.ExecSQL;
+      except
+        on E: Exception do
+        begin
+          ShowMessage('Error inserting line: ' + Line + #13#10 + 'Error: ' +
+            E.Message);
+        end;
+      end;
+    end;
+  finally
+    CloseFile(CSVFile);
+  end;
+end;
+
+end.
