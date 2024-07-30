@@ -1,0 +1,55 @@
+unit Download;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.FMTBcd, Data.DB,
+  Data.SqlExpr;
+
+type
+  Tform_download = class(TForm)
+    btnExportToCSV: TButton;
+    sqlConnect: TSQLConnection;
+    sqlQuery: TSQLQuery;
+    dataSources: TDataSource;
+    savesDialog: TSaveDialog;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_download: Tform_download;
+
+implementation
+
+uses
+
+
+{$R *.dfm}
+
+procedure Tform_download.FormCreate(Sender: TObject);
+begin
+
+ // Setting up SQLConnection
+  sqlConnect.DriverName := 'MySQL';
+ sqlConnect.GetDriverFunc := 'getSQLDriverMYSQL';
+ sqlConnect.LibraryName := 'dbxmys.dll';
+  sqlConnect.VendorLib := 'libmysql.dll';
+  sqlConnect.Params.Values['HostName'] := 'localhost';
+  sqlConnect.Params.Values['Database'] := 'rentaldvd';
+  sqlConnect.Params.Values['User_Name'] := 'rangga';
+  sqlConnect.Params.Values['Password'] := 'rangga';
+  sqlConnect.Params.Values['Port'] := '3306';
+  sqlConnect.Connected := True;
+
+  // Setting up SQLQuery
+  sqlQuery.SQLConnection := sqlConnect;
+  sqlQuery.SQL.Text := 'SELECT id, nama, pekerjaan, alamat, telp FROM anggota';
+
+end;
+
+end.

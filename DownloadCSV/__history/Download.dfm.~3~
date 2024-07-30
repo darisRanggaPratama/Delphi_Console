@@ -1,0 +1,29 @@
+object form_download: Tform_download
+  Left = 0
+  Top = 0
+  Caption = 'Download CSV'
+  ClientHeight = 303
+  ClientWidth = 543
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  TextHeight = 15
+  object btnExportToCSV: TButton
+    Left = 204
+    Top = 64
+    Width = 154
+    Height = 101
+    Caption = 'Export To CSV'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'JetBrains Mono'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+end

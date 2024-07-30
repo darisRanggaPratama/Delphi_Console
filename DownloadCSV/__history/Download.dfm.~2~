@@ -1,0 +1,15 @@
+object form_download: Tform_download
+  Left = 0
+  Top = 0
+  Caption = 'Download CSV'
+  ClientHeight = 303
+  ClientWidth = 543
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  TextHeight = 15
+end

@@ -1,0 +1,92 @@
+unit Download;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.FMTBcd, Data.DB,
+  Data.SqlExpr;
+
+type
+  Tform_download = class(TForm)
+    btnExportToCSV: TButton;
+    sqlConnect: TSQLConnection;
+    sqlQuery: TSQLQuery;
+    dataSources: TDataSource;
+    savesDialog: TSaveDialog;
+    procedure FormCreate(Sender: TObject);
+    procedure btnExportToCSVClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_download: Tform_download;
+
+implementation
+
+
+{$R *.dfm}
+
+procedure Tform_download.FormCreate(Sender: TObject);
+begin
+
+ // Setting up SQLConnection
+  sqlConnect.DriverName := 'MySQL';
+ sqlConnect.GetDriverFunc := 'getSQLDriverMYSQL';
+ sqlConnect.LibraryName := 'dbxmys.dll';
+  sqlConnect.VendorLib := 'libmysql.dll';
+  sqlConnect.Params.Values['HostName'] := 'localhost';
+  sqlConnect.Params.Values['Database'] := 'rentaldvd';
+  sqlConnect.Params.Values['User_Name'] := 'rangga';
+  sqlConnect.Params.Values['Password'] := 'rangga';
+  sqlConnect.Params.Values['Port'] := '3306';
+  sqlConnect.Connected := True;
+
+  // Setting up SQLQuery
+  sqlQuery.SQLConnection := sqlConnect;
+  sqlQuery.SQL.Text := 'SELECT id, nama, pekerjaan, alamat, telp FROM anggota';
+
+end;
+
+procedure Tform_download.btnExportToCSVClick(Sender: TObject);
+var
+  CSVFile: TextFile;
+  i: Integer;
+  Line: string;
+begin
+  if savesDialog.Execute then
+  begin
+    AssignFile(CSVFile, savesDialog.FileName);
+    Rewrite(CSVFile);
+
+    // Write the header
+    Line := '';
+    for i := 0 to  sqlQuery.FieldCount - 1 do
+      Line := Line +  sqlQuery.Fields[i].FieldName + ';';
+    SetLength(Line, Length(Line) - 1); // remove last semicolon
+    Writeln(CSVFile, Line);
+
+    // Write the data
+    sqlQuery.Open;
+    while not  sqlQuery.Eof do
+    begin
+      Line := '';
+      for i := 0 to  sqlQuery.FieldCount - 1 do
+        Line := Line +  sqlQuery.Fields[i].AsString + ';';
+      SetLength(Line, Length(Line) - 1); // remove last semicolon
+      Writeln(CSVFile, Line);
+       sqlQuery.Next;
+    end;
+
+    CloseFile(CSVFile);
+    sqlQuery.Close;
+
+    ShowMessage('Data telah diekspor ke file CSV.');
+  end;
+end;
+
+
+end.

@@ -1,0 +1,176 @@
+unit Upload;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Data.DB,
+  Data.Win.ADODB, System.IOUtils;
+
+type
+  Tform_upload = class(TForm)
+    btnImportExcel: TSpeedButton;
+    btnImportCSV: TSpeedButton;
+    btnImport: TButton;
+    lblStatus: TLabel;
+    ADOConnection1: TADOConnection;
+    ADOQuery1: TADOQuery;
+    memLog: TMemo;
+    procedure btnImportExcelClick(Sender: TObject);
+    procedure btnImportCSVClick(Sender: TObject);
+    procedure btnImportClick(Sender: TObject);
+
+  private
+    procedure ImportCSVToMySQL;
+  public
+    { Public declarations }
+  end;
+
+var
+  form_upload: Tform_upload;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  testing;
+
+procedure Tform_upload.btnImportClick(Sender: TObject);
+begin
+  ImportCSVToMySQL;
+end;
+
+procedure Tform_upload.ImportCSVToMySQL;
+var
+  CSVFile: TextFile;
+  Line, SQL: string;
+  Fields: TArray<string>;
+begin
+  memLog.Clear;
+
+  // Konfigurasi koneksi MySQL
+  ADOConnection1.ConnectionString := 'Provider=MSDASQL;' +
+    'Driver={MySQL ODBC 8.0 Unicode Driver};' + 'Server=localhost;' +
+    'Port=3306;' + 'Database=rentaldvd;' + 'User=rangga;' + 'Password=rangga;' +
+    'Option=3;';
+
+  try
+    ADOConnection1.Open;
+    memLog.Lines.Add('Koneksi ke database berhasil.');
+
+    AssignFile(CSVFile, ExtractFilePath(Application.ExeName) +
+      'library\upload\anggota_import.csv');
+    Reset(CSVFile);
+
+    while not Eof(CSVFile) do
+    begin
+      ReadLn(CSVFile, Line);
+      Fields := Line.Split([';']);
+
+      if Length(Fields) = 4 then // Pastikan ada 5 kolom
+      begin
+        SQL := 'INSERT INTO anggota (id, nama, pekerjaan, alamat, telp) VALUES (:id, :nama, :pekerjaan, :alamat, :telp)';
+
+        ADOQuery1.SQL.Text := SQL;
+        ADOQuery1.Parameters.ParamByName('id').Value := Fields[0];
+        ADOQuery1.Parameters.ParamByName('nama').Value := Fields[1];
+        ADOQuery1.Parameters.ParamByName('pekerjaan').Value := Fields[2];
+        ADOQuery1.Parameters.ParamByName('alamat').Value := Fields[3];
+        ADOQuery1.Parameters.ParamByName('telp').Value := Fields[4];
+
+        ADOQuery1.ExecSQL;
+
+        memLog.Lines.Add('Data berhasil diimpor: ' + Fields[0]);
+      end
+      else
+      begin
+        memLog.Lines.Add('Baris tidak valid: ' + Line);
+      end;
+    end;
+
+    Writeln(Length(Fields));
+
+    CloseFile(CSVFile);
+    memLog.Lines.Add('Impor data selesai.');
+  except
+    on E: Exception do
+    begin
+      memLog.Lines.Add('Error: ' + E.Message);
+    end;
+  end;
+
+  ADOConnection1.Close;
+end;
+
+procedure Tform_upload.btnImportCSVClick(Sender: TObject);
+var
+  PythonExe, ScriptPath: string;
+  StartInfo: TStartupInfo;
+  ProcessInfo: TProcessInformation;
+  CommandLine: string;
+begin
+  PythonExe := 'python.exe';
+  // Pastikan python.exe ada di PATH sistem atau gunakan path lengkap
+  ScriptPath := ExtractFilePath(Application.ExeName) + '\library\importCSV.py';
+
+  CommandLine := Format('"%s" "%s"', [PythonExe, ScriptPath]);
+
+  FillChar(StartInfo, SizeOf(TStartupInfo), 0);
+  StartInfo.cb := SizeOf(TStartupInfo);
+
+  if CreateProcess(nil, PChar(CommandLine), nil, nil, False, 0, nil, nil,
+    StartInfo, ProcessInfo) then
+  begin
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+    ShowMessage('Script Python telah dijalankan.');
+  end
+  else
+    ShowMessage('Gagal menjalankan script Python.');
+end;
+
+procedure Tform_upload.btnImportExcelClick(Sender: TObject);
+var
+  PythonScriptPath, Command: string;
+  StartInfo: TStartupInfo;
+  ProcessInfo: TProcessInformation;
+begin
+  // Path ke skrip Python Anda
+  PythonScriptPath := ExtractFilePath(Application.ExeName) +
+    '\library\importXLSX.py';
+
+  // Pastikan file skrip Python ada
+  if not FileExists(PythonScriptPath) then
+  begin
+    ShowMessage('File skrip Python tidak ditemukan!');
+    Exit;
+  end;
+
+  // Buat command untuk menjalankan skrip Python
+  Command := 'python "' + PythonScriptPath + '"';
+
+  // Inisialisasi struktur StartupInfo
+  FillChar(StartInfo, SizeOf(TStartupInfo), 0);
+  StartInfo.cb := SizeOf(TStartupInfo);
+
+  // Jalankan command
+  if CreateProcess(nil, PChar(Command), nil, nil, False, 0, nil, nil, StartInfo,
+    ProcessInfo) then
+  begin
+    // Tunggu proses selesai
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+
+    // Tutup handle
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+
+    ShowMessage('Import dari Excel selesai!');
+  end
+  else
+    ShowMessage('Gagal menjalankan skrip Python!');
+end;
+
+end.

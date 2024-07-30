@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2024/07/30 08:18:49.232,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 08:21:39.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 08:21:39.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/07/30 08:26:04.710,D:\up2github\Delphi_Console\DownloadCSV\Download.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas</Transaction>
+    <Transaction>2024/07/30 08:26:04.710,D:\up2github\Delphi_Console\DownloadCSV\Download.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm</Transaction>
+    <Transaction>2024/07/30 08:26:21.944,D:\up2github\Delphi_Console\DownloadCSV\DownloadCSV.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

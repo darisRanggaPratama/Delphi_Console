@@ -1,0 +1,50 @@
+object form_upload: Tform_upload
+  Left = 0
+  Top = 0
+  Caption = 'Upload Data'
+  ClientHeight = 139
+  ClientWidth = 411
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  TextHeight = 15
+  object btnImportExcel: TSpeedButton
+    Left = 8
+    Top = 25
+    Width = 150
+    Height = 42
+    Caption = 'Import From Excel'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnImportExcelClick
+  end
+  object btnImportCSV: TSpeedButton
+    Left = 183
+    Top = 25
+    Width = 150
+    Height = 42
+    Caption = 'Import From CSV'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnImportCSVClick
+  end
+  object btnTesting: TSpeedButton
+    Left = 149
+    Top = 73
+    Width = 96
+    Height = 38
+    Caption = 'TESTING'
+  end
+end

@@ -1,0 +1,128 @@
+unit MainUnit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls;
+
+type
+  TMainForm = class(TForm)
+    SpeedButton1: TSpeedButton;
+    Memo1: TMemo;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+    function ExecuteAndWait(const ExecuteFile, ParamString: string): Boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  System.Diagnostics;
+
+function TMainForm.ExecuteAndWait(const ExecuteFile,
+  ParamString: string): Boolean;
+var
+  StartInfo: TStartupInfo;
+  ProcessInfo: TProcessInformation;
+  ExitCode: Cardinal;
+  OutputPipe: THandle;
+  Buffer: array [0 .. 4095] of AnsiChar;
+  BytesRead: Cardinal;
+  Output: AnsiString;
+  SecurityAttr: TSecurityAttributes;
+begin
+  Result := False;
+  FillChar(StartInfo, SizeOf(TStartupInfo), 0);
+  StartInfo.cb := SizeOf(TStartupInfo);
+
+  // Set up security attributes for the pipe
+  SecurityAttr.nLength := SizeOf(TSecurityAttributes);
+  SecurityAttr.bInheritHandle := True;
+  SecurityAttr.lpSecurityDescriptor := nil;
+
+  // Create a pipe for the child process's STDOUT
+  if not CreatePipe(OutputPipe, StartInfo.hStdOutput, @SecurityAttr, 0) then
+  begin
+    Memo1.Lines.Add('Failed to create pipe');
+    Exit;
+  end;
+
+  StartInfo.hStdError := StartInfo.hStdOutput;
+  StartInfo.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;
+  StartInfo.wShowWindow := SW_HIDE;
+
+  if CreateProcess(PChar(ExecuteFile), PChar(ParamString), nil, nil, True,
+    CREATE_NO_WINDOW, nil, nil, StartInfo, ProcessInfo) then
+  begin
+    // Close the write end of the pipe
+    CloseHandle(StartInfo.hStdOutput);
+
+    // Read output from the child process's pipe for STDOUT
+    Output := '';
+    repeat
+      if ReadFile(OutputPipe, Buffer, SizeOf(Buffer) - 1, BytesRead, nil) then
+      begin
+        Buffer[BytesRead] := #0;
+        Output := Output + AnsiString(Buffer);
+      end;
+    until BytesRead < SizeOf(Buffer) - 1;
+
+    // Wait for the process to finish
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+
+    // Get the exit code
+    GetExitCodeProcess(ProcessInfo.hProcess, ExitCode);
+
+    // Close process and thread handles
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+
+    // Display the output
+    Memo1.Lines.Add('Python script output:');
+    Memo1.Lines.Add(string(Output));
+
+    Memo1.Lines.Add('Python script exit code: ' + IntToStr(ExitCode));
+
+    Result := ExitCode = 0;
+  end
+  else
+    Memo1.Lines.Add('Failed to create process: ' +
+      SysErrorMessage(GetLastError));
+
+  // Close the read end of the pipe
+  CloseHandle(OutputPipe);
+end;
+
+procedure TMainForm.SpeedButton1Click(Sender: TObject);
+var
+  PythonExe, ScriptPath: string;
+begin
+  Memo1.Clear;
+  PythonExe := 'python.exe';
+  // Pastikan python.exe ada di PATH sistem atau gunakan path lengkap
+  ScriptPath := ExtractFilePath(Application.ExeName) + 'import_data.py';
+
+  if not FileExists(ScriptPath) then
+  begin
+    Memo1.Lines.Add('Script Python tidak ditemukan: ' + ScriptPath);
+    Exit;
+  end;
+
+  Memo1.Lines.Add('Menjalankan script Python...');
+  if ExecuteAndWait(PythonExe, '"' + ScriptPath + '"') then
+    Memo1.Lines.Add('Script Python berhasil dijalankan.')
+  else
+    Memo1.Lines.Add('Terjadi kesalahan saat menjalankan script Python.');
+end;
+
+end.

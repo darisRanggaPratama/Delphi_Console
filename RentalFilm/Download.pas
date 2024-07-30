@@ -11,7 +11,6 @@ type
   Tform_download = class(TForm)
     btnExport: TSpeedButton;
     btnExportCSV: TSpeedButton;
-
     procedure btnExportClick(Sender: TObject);
     procedure btnExportCSVClick(Sender: TObject);
   private
@@ -31,14 +30,14 @@ uses
   System.IOUtils;
 
 procedure Tform_download.btnExportClick(Sender: TObject);
-
 var
   PythonScriptPath, Command: string;
   StartInfo: TStartupInfo;
   ProcessInfo: TProcessInformation;
 begin
   // Path ke skrip Python Anda
-  PythonScriptPath := ExtractFilePath(Application.ExeName) + 'export2Excel.py';
+  PythonScriptPath := ExtractFilePath(Application.ExeName) +
+    '\library\export2Excel.py';
 
   // Pastikan file skrip Python ada
   if not FileExists(PythonScriptPath) then
@@ -78,7 +77,8 @@ var
   ProcessInfo: TProcessInformation;
 begin
   // Path ke skrip Python Anda
-  PythonScriptPath := ExtractFilePath(Application.ExeName) + 'export2CSV.py';
+  PythonScriptPath := ExtractFilePath(Application.ExeName) +
+    '\library\export2CSV.py';
 
   // Pastikan file skrip Python ada
   if not FileExists(PythonScriptPath) then

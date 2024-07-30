@@ -35,6 +35,7 @@ type
     procedure gridAnggotaDblClick(Sender: TObject);
     procedure btnLaporanAnggotaClick(Sender: TObject);
 
+
   private
     { Private declarations }
   public
@@ -55,6 +56,8 @@ procedure Tform_dashboard.btnAnggotaClick(Sender: TObject);
 begin
   form_anggota.Show;
 end;
+
+
 
 procedure Tform_dashboard.btnLaporanAnggotaClick(Sender: TObject);
 begin
@@ -84,7 +87,7 @@ begin
       zConnect.Password := 'rangga';
       zConnect.Database := 'rentaldvd';
       zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
-        'libmysql.dll';
+        '\library\libmysql.dll';
       zConnect.Connected := True;
       queryAnggota_.Active := True;
     end;

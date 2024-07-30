@@ -1,0 +1,30 @@
+unit Download;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.FMTBcd, Data.DB,
+  Data.SqlExpr;
+
+type
+  Tform_download = class(TForm)
+    btnExportToCSV: TButton;
+    sqlConnect: TSQLConnection;
+    sqlQuery: TSQLQuery;
+    dataSources: TDataSource;
+    savesDialog: TSaveDialog;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_download: Tform_download;
+
+implementation
+
+{$R *.dfm}
+
+end.
