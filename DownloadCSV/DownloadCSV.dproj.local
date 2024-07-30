@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/07/30 08:18:49.232,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 08:21:39.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2024/07/30 08:21:39.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 08:26:04.710,D:\up2github\Delphi_Console\DownloadCSV\Download.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas</Transaction>
-    <Transaction>2024/07/30 08:26:04.710,D:\up2github\Delphi_Console\DownloadCSV\Download.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm</Transaction>
-    <Transaction>2024/07/30 08:26:21.944,D:\up2github\Delphi_Console\DownloadCSV\DownloadCSV.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2024/07/30 09:44:53.443,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 09:45:58.195,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 09:51:23.861,D:\up2github\Delphi_Console\DownloadCSV\dataModule.dfm=D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm</Transaction>
-    <Transaction>2024/07/30 09:51:23.861,D:\up2github\Delphi_Console\DownloadCSV\dataModule.pas=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 10:00:41.560,D:\up2github\Delphi_Console\DownloadCSV\Download.pas=</Transaction>
-    <Transaction>2024/07/30 10:00:50.747,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 10:01:07.231,D:\up2github\Delphi_Console\DownloadCSV\ExportCSV.pas=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 10:01:07.231,D:\up2github\Delphi_Console\DownloadCSV\ExportCSV.dfm=D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm</Transaction>
-    <Transaction>2024/07/30 10:46:47.783,D:\up2github\Delphi_Console\DownloadCSV\dataModule.pas=</Transaction>
-    <Transaction>2024/07/30 10:52:18.141,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 10:52:28.113,D:\up2github\Delphi_Console\DownloadCSV\ImportCSV.pas=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
-    <Transaction>2024/07/30 10:52:28.113,D:\up2github\Delphi_Console\DownloadCSV\ImportCSV.dfm=D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm</Transaction>
+	<Transactions>
+    <Transaction>2024/07/30 08:18:49.000.232,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 08:21:39.000.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm</Transaction>
+    <Transaction>2024/07/30 08:21:39.000.984,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas</Transaction>
+    <Transaction>2024/07/30 08:26:04.000.710,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.dfm=D:\up2github\Delphi_Console\DownloadCSV\Download.dfm</Transaction>
+    <Transaction>2024/07/30 08:26:04.000.710,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Download.pas=D:\up2github\Delphi_Console\DownloadCSV\Download.pas</Transaction>
+    <Transaction>2024/07/30 08:26:21.000.944,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\DownloadCSV\DownloadCSV.dproj</Transaction>
+    <Transaction>2024/07/30 09:44:53.000.443,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 09:45:58.000.195,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 09:51:23.000.861,D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas=D:\up2github\Delphi_Console\DownloadCSV\dataModule.pas</Transaction>
+    <Transaction>2024/07/30 09:51:23.000.861,D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm=D:\up2github\Delphi_Console\DownloadCSV\dataModule.dfm</Transaction>
+    <Transaction>2024/07/30 10:00:41.000.560,D:\up2github\Delphi_Console\DownloadCSV\Download.pas=</Transaction>
+    <Transaction>2024/07/30 10:00:50.000.747,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 10:01:07.000.231,D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm=D:\up2github\Delphi_Console\DownloadCSV\ExportCSV.dfm</Transaction>
+    <Transaction>2024/07/30 10:01:07.000.231,D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas=D:\up2github\Delphi_Console\DownloadCSV\ExportCSV.pas</Transaction>
+    <Transaction>2024/07/30 10:46:47.000.783,D:\up2github\Delphi_Console\DownloadCSV\dataModule.pas=</Transaction>
+    <Transaction>2024/07/30 10:52:18.000.141,=D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 10:52:28.000.113,D:\up2github\Delphi_Console\DownloadCSV\Unit1.dfm=D:\up2github\Delphi_Console\DownloadCSV\ImportCSV.dfm</Transaction>
+    <Transaction>2024/07/30 10:52:28.000.113,D:\up2github\Delphi_Console\DownloadCSV\Unit1.pas=D:\up2github\Delphi_Console\DownloadCSV\ImportCSV.pas</Transaction>
   </Transactions>
 </BorlandProject>
