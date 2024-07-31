@@ -1,0 +1,82 @@
+unit LoadCSV;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  Tform_export = class(TForm)
+    btnExport: TButton;
+    btnOpenForm: TButton;
+    procedure FormShow(Sender: TObject);
+  private
+    procedure ExportDataToCSV(const FileName: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  form_export: Tform_export;
+
+implementation
+
+uses
+  ConnectMySQL;
+
+{$R *.dfm}
+
+procedure Tform_export.ExportDataToCSV(const FileName: string);
+var
+  CSVFile: TextFile;
+  i: Integer;
+  Line: string;
+begin
+  AssignFile(CSVFile, FileName);
+  Rewrite(CSVFile);
+
+  try
+    // Write column headers
+    Line := 'id;nama;pekerjaan;alamat;telp';
+    Writeln(CSVFile, Line);
+
+    // Write data rows
+    queryDB.First;
+    while not queryAnggota.Eof do
+    begin
+      Line := '';
+      for i := 0 to queryAnggota.FieldCount - 1 do
+      begin
+        Line := Line + queryAnggota.Fields[i].AsString;
+        if i < queryAnggota.FieldCount - 1 then
+          Line := Line + ';';
+      end;
+      Writeln(CSVFile, Line);
+      queryAnggota.Next;
+    end;
+
+  finally
+    CloseFile(CSVFile);
+  end;
+end;
+
+procedure Tform_export.FormShow(Sender: TObject);
+begin
+  with DataModuleDB do
+  begin
+    zConnect.HostName := 'localhost';
+    zConnect.Port := 3306;
+    zConnect.Database := 'rentaldvd';
+    zConnect.Protocol := 'mysql';
+    zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
+      '\library\libmysql.dll';
+      zConnect.User := 'rangga';
+      zConnect.Password := 'rangga';
+      zConnect.Connected := True;
+      queryDB.Active := True;
+  end;
+end;
+
+end.

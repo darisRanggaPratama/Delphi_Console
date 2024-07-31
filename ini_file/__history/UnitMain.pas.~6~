@@ -1,0 +1,60 @@
+unit UnitMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.IniFiles;
+
+type
+  Tform_main = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure createConfiguration;
+
+  end;
+
+var
+  form_main: Tform_main;
+  namaFile: String;
+  myConfig: TIniFile;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tform_main.createConfiguration;
+begin
+  try
+    namaFile := ExtractFilePath(Application.ExeName) + '\setting\setApps.ini';
+    if FileExists(namaFile) then
+    Exit
+    else
+    begin
+      myConfig := TIniFile.Create(namaFile);
+      with myConfig do
+      begin
+        WriteString('Setting', 'Username', '-');
+        WriteString('Setting', 'Password', '-');
+        WriteInteger('Setting', 'Port', 0);
+        WriteString('Setting', 'Database', '-');
+        Free;
+      end;
+    end;
+  except
+    on error: Exception do
+      ShowMessage(error.Message);
+  end;
+
+end;
+
+procedure Tform_main.FormCreate(Sender: TObject);
+begin
+  createConfiguration;
+end;
+
+end.

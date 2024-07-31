@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/07/30 17:52:47.000.405,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 17:54:30.000.619,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\upload_download_csv\LoadCSV.dfm</Transaction>
+    <Transaction>2024/07/30 17:54:30.000.619,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\upload_download_csv\LoadCSV.pas</Transaction>
+    <Transaction>2024/07/30 17:55:24.000.924,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\upload_download_csv\input_output_csv.dproj</Transaction>
+    <Transaction>2024/07/30 17:55:47.000.321,=D:\up2github\Delphi_Console\upload_download_csv\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 17:56:19.000.018,D:\up2github\Delphi_Console\upload_download_csv\Unit1.pas=D:\up2github\Delphi_Console\upload_download_csv\ConnectMySQL.pas</Transaction>
+    <Transaction>2024/07/30 17:56:19.000.018,D:\up2github\Delphi_Console\upload_download_csv\Unit1.dfm=D:\up2github\Delphi_Console\upload_download_csv\ConnectMySQL.dfm</Transaction>
+    <Transaction>2024/07/30 18:31:02.000.467,D:\up2github\Delphi_Console\upload_download_csv\ConnectMySQL.pas=</Transaction>
+    <Transaction>2024/07/30 18:41:00.000.990,=D:\up2github\Delphi_Console\upload_download_csv\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 18:41:36.000.184,D:\up2github\Delphi_Console\upload_download_csv\Unit1.pas=D:\up2github\Delphi_Console\upload_download_csv\ImportCSV.pas</Transaction>
+    <Transaction>2024/07/30 18:41:36.000.184,D:\up2github\Delphi_Console\upload_download_csv\Unit1.dfm=D:\up2github\Delphi_Console\upload_download_csv\ImportCSV.dfm</Transaction>
+    <Transaction>2024/07/30 18:41:56.000.515,D:\up2github\Delphi_Console\upload_download_csv\LoadCSV.dfm=D:\up2github\Delphi_Console\upload_download_csv\ExportCSV.dfm</Transaction>
+    <Transaction>2024/07/30 18:41:56.000.515,D:\up2github\Delphi_Console\upload_download_csv\LoadCSV.pas=D:\up2github\Delphi_Console\upload_download_csv\ExportCSV.pas</Transaction>
+  </Transactions>
+</BorlandProject>

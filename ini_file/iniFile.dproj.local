@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/07/31 07:48:25.000.597,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/31 07:48:50.000.510,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\UnitMain.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/07/31 07:48:50.000.510,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\UnitMain.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/31 07:49:01.000.926,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\iniFile.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

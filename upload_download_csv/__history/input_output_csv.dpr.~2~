@@ -1,0 +1,16 @@
+program input_output_csv;
+
+uses
+  Vcl.Forms,
+  LoadCSV in 'LoadCSV.pas' {form_export},
+  ConnectMySQL in 'ConnectMySQL.pas' {DataModuleDB: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tform_export, form_export);
+  Application.CreateForm(TDataModuleDB, DataModuleDB);
+  Application.Run;
+end.
