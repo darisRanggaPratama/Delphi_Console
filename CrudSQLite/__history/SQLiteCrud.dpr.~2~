@@ -1,0 +1,14 @@
+program SQLiteCrud;
+
+uses
+  Vcl.Forms,
+  Master in 'Master.pas' {form_master};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tform_master, form_master);
+  Application.Run;
+end.

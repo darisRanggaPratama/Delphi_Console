@@ -1,0 +1,97 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 689
+  ClientWidth = 958
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  TextHeight = 15
+  object strGridMaster: TStringGrid
+    Tag = 3
+    Left = 23
+    Top = 159
+    Width = 911
+    Height = 120
+    ColCount = 3
+    FixedCols = 0
+    RowCount = 2
+    TabOrder = 0
+    ColWidths = (
+      64
+      304
+      304)
+    ColAligments = (
+      1
+      0
+      0)
+  end
+  object connectSQLite: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=connectSQLite')
+    Connected = True
+    LoginPrompt = False
+    Left = 30
+    Top = 406
+  end
+  object BindSourceMaster: TBindSourceDB
+    DataSet = tableMaster
+    ScopeMappings = <>
+    Left = 210
+    Top = 407
+  end
+  object tableMaster: TFDTable
+    Active = True
+    IndexFieldNames = 'id'
+    Connection = connectSQLite
+    ResourceOptions.AssignedValues = [rvEscapeExpand]
+    TableName = 'master'
+    Left = 117
+    Top = 407
+    object fldMaster_id: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object memoFldMaster_kode: TWideMemoField
+      FieldName = 'kode'
+      Origin = 'kode'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object memoFldMaster_nama: TWideMemoField
+      FieldName = 'nama'
+      Origin = 'nama'
+      Required = True
+      BlobType = ftWideMemo
+    end
+  end
+  object bindListMaster: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 313
+    Top = 407
+    object linkGridMaster: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceMaster
+      GridControl = strGridMaster
+      Columns = <
+        item
+          MemberName = 'id'
+        end
+        item
+          MemberName = 'kode'
+          TextWidth = 50
+        end
+        item
+          MemberName = 'nama'
+          TextWidth = 50
+        end>
+    end
+  end
+end

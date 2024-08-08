@@ -1,0 +1,62 @@
+unit Master;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, Data.DB,
+  FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, Vcl.Bind.Grid, System.Rtti, System.Bindings.Outputs,
+  Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, FireDAC.Comp.DataSet,
+  Data.Bind.Components, Data.Bind.Grid, Vcl.Grids, Data.Bind.DBScope, Vcl.Menus,
+  Vcl.StdCtrls;
+
+type
+  Tform_master = class(TForm)
+    connectSQLite: TFDConnection;
+    BindSourceMaster: TBindSourceDB;
+    tableMaster: TFDTable;
+    strGridMaster: TStringGrid;
+    linkGridMaster: TLinkGridToDataSource;
+    bindListMaster: TBindingsList;
+    fldMaster_id: TFDAutoIncField;
+    memoFldMaster_kode: TWideMemoField;
+    memoFldMaster_nama: TWideMemoField;
+    lblKode: TLabel;
+    lblNama: TLabel;
+    txtKode: TEdit;
+    txtNama: TEdit;
+    btnSave: TButton;
+    btnAdd: TButton;
+    btnUpdate: TButton;
+    btnDelete: TButton;
+    menuMaster: TMainMenu;
+    ransaksi1: TMenuItem;
+    menu_formPenjualan: TMenuItem;
+    procedure menu_formPenjualanClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_master: Tform_master;
+
+implementation
+
+uses
+Transaksi;
+
+{$R *.dfm}
+
+procedure Tform_master.menu_formPenjualanClick(Sender: TObject);
+begin
+form_transaksi.Show;
+end;
+
+end.

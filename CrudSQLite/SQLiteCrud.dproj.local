@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/01 06:00:14.000.122,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/01 06:01:11.000.427,D:\up2github\Delphi_Console\CrudSQLite\Main.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/08/01 06:01:11.000.427,D:\up2github\Delphi_Console\CrudSQLite\Main.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/01 06:01:36.000.134,D:\up2github\Delphi_Console\CrudSQLite\SQLiteCrud.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/08/01 07:58:24.000.860,D:\up2github\Delphi_Console\CrudSQLite\Main.pas=D:\up2github\Delphi_Console\CrudSQLite\Master.pas</Transaction>
+    <Transaction>2024/08/01 07:58:24.000.860,D:\up2github\Delphi_Console\CrudSQLite\Main.dfm=D:\up2github\Delphi_Console\CrudSQLite\Master.dfm</Transaction>
+    <Transaction>2024/08/01 08:01:41.000.103,=D:\up2github\Delphi_Console\CrudSQLite\Unit1.pas</Transaction>
+    <Transaction>2024/08/01 08:24:39.000.146,D:\up2github\Delphi_Console\CrudSQLite\Unit1.dfm=D:\up2github\Delphi_Console\CrudSQLite\Transaksi.dfm</Transaction>
+    <Transaction>2024/08/01 08:24:39.000.146,D:\up2github\Delphi_Console\CrudSQLite\Unit1.pas=D:\up2github\Delphi_Console\CrudSQLite\Transaksi.pas</Transaction>
+  </Transactions>
+</BorlandProject>

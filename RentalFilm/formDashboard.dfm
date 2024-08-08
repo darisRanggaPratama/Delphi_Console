@@ -156,6 +156,8 @@ object form_dashboard: Tform_dashboard
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 1102
+        ExplicitHeight = 489
       end
     end
     object tabInfoAnggota: TTabSheet

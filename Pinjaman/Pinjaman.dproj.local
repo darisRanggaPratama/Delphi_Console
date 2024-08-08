@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/06 17:48:37.000.956,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/06 17:57:14.000.997,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\Pinjaman\MainForm.dfm</Transaction>
+    <Transaction>2024/08/06 17:57:14.000.997,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\Pinjaman\MainForm.pas</Transaction>
+    <Transaction>2024/08/06 17:57:28.000.272,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\Pinjaman\Pinjaman.dproj</Transaction>
+    <Transaction>2024/08/06 18:17:15.000.446,=D:\up2github\Delphi_Console\Pinjaman\Unit1.pas</Transaction>
+    <Transaction>2024/08/06 18:18:39.000.632,D:\up2github\Delphi_Console\Pinjaman\Unit1.dfm=D:\up2github\Delphi_Console\Pinjaman\Entry.dfm</Transaction>
+    <Transaction>2024/08/06 18:18:39.000.632,D:\up2github\Delphi_Console\Pinjaman\Unit1.pas=D:\up2github\Delphi_Console\Pinjaman\Entry.pas</Transaction>
+    <Transaction>2024/08/07 04:37:23.000.597,=D:\up2github\Delphi_Console\Pinjaman\Unit1.pas</Transaction>
+    <Transaction>2024/08/07 04:38:01.000.214,D:\up2github\Delphi_Console\Pinjaman\Unit1.pas=D:\up2github\Delphi_Console\Pinjaman\dataModuleDB.pas</Transaction>
+    <Transaction>2024/08/07 04:38:01.000.214,D:\up2github\Delphi_Console\Pinjaman\Unit1.dfm=D:\up2github\Delphi_Console\Pinjaman\dataModuleDB.dfm</Transaction>
+    <Transaction>2024/08/08 08:08:36.000.375,=D:\up2github\Delphi_Console\Pinjaman\Unit1.pas</Transaction>
+    <Transaction>2024/08/08 08:09:04.000.424,D:\up2github\Delphi_Console\Pinjaman\Unit1.dfm=D:\up2github\Delphi_Console\Pinjaman\ExIm.dfm</Transaction>
+    <Transaction>2024/08/08 08:09:04.000.424,D:\up2github\Delphi_Console\Pinjaman\Unit1.pas=D:\up2github\Delphi_Console\Pinjaman\ExIm.pas</Transaction>
+  </Transactions>
+</BorlandProject>

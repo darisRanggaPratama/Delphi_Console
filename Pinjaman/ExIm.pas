@@ -1,0 +1,206 @@
+unit ExIm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Data.DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
+  ZConnection;
+
+type
+  TformExIm = class(TForm)
+    btnExport: TSpeedButton;
+    btnImport: TSpeedButton;
+    zConnect: TZConnection;
+    qAngsur: TZQuery;
+    procedure btnImportClick(Sender: TObject);
+    procedure btnExportClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure ConnectToDB();
+    procedure ImportCSVToMySQL(const FileName: string);
+    procedure ExportDataToCSV(const FileName: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  formExIm: TformExIm;
+
+implementation
+
+uses
+MainForm;
+
+{$R *.dfm}
+
+procedure TformExIm.ConnectToDB();
+begin
+  // Set up the connection
+  with zConnect do
+  begin
+    HostName := 'localhost';
+    Port := 3306;
+    Database := 'pinjam';
+    Protocol := 'mysql';
+    LibraryLocation := ExtractFilePath(Application.ExeName) +
+      '\library\libmysql.dll';
+    User := 'rangga';
+    Password := 'rangga';
+  end;
+end;
+
+procedure TformExIm.btnExportClick(Sender: TObject);
+begin
+  // Set up the connection
+ ConnectToDB();
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    qAngsur.SQL.Clear;
+    qAngsur.SQL.Text := 'SELECT no, id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo FROM angsur';
+
+    if qAngsur.SQL.Text = '' then
+      raise Exception.Create('SQL Query is Empty');
+
+    qAngsur.Open;
+
+    // Export data to CSV
+    ExportDataToCSV(ExtractFilePath(Application.ExeName) +
+      '\export\angsur.csv');
+    ShowMessage('Data exported successfully!');
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TformExIm.btnImportClick(Sender: TObject);
+var
+  ImportPath: string;
+begin
+  ImportPath := ExtractFilePath(Application.ExeName) + '\import\angsur.csv';
+
+  if not FileExists(ImportPath) then
+  begin
+    ShowMessage('File CSV tidak ditemukan: ' + ImportPath);
+    Exit;
+  end;
+
+   // Set up the connection
+  ConnectToDB();
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    ImportCSVToMySQL(ImportPath);
+    ShowMessage('Data imported successfully!');
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TformExIm.ImportCSVToMySQL(const FileName: string);
+var
+  CSVFile: TextFile;
+  Line, SQLInsert: string;
+  Fields: TArray<string>;
+  IsFirstLine: Boolean;
+begin
+  AssignFile(CSVFile, FileName);
+  Reset(CSVFile);
+  IsFirstLine := True;
+
+  try
+    qAngsur.Connection := zConnect;
+
+    while not Eof(CSVFile) do
+    begin
+      ReadLn(CSVFile, Line);
+
+      if IsFirstLine then
+      begin
+        IsFirstLine := False;
+        Continue; // Skip header line
+      end;
+
+      Fields := Line.Split([';']);
+
+      if Length(Fields) <> 8 then
+      begin
+        ShowMessage('Invalid CSV format in line: ' + Line);
+        Continue;
+      end;
+
+      SQLInsert :=
+        'INSERT INTO angsur (id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo) VALUES ('
+        + QuotedStr(Fields[0]) + ', ' + QuotedStr(Fields[1]) + ', ' +
+        QuotedStr(Fields[2]) + ', ' + QuotedStr(Fields[3]) + ', ' +
+        QuotedStr(Fields[4]) + ', ' + QuotedStr(Fields[5]) + ', ' +
+        QuotedStr(Fields[6]) + ', ' + QuotedStr(Fields[7]) + ')';
+
+      qAngsur.SQL.Text := SQLInsert;
+
+      try
+        qAngsur.ExecSQL;
+      except
+        on E: Exception do
+        begin
+          ShowMessage('Error inserting line: ' + Line + #13#10 + 'Error: ' +
+            E.Message);
+        end;
+      end;
+    end;
+  finally
+    CloseFile(CSVFile);
+  end;
+end;
+
+procedure TformExIm.ExportDataToCSV(const FileName: string);
+var
+  CSVFile: TextFile;
+  i: Integer;
+  Line: string;
+begin
+
+  AssignFile(CSVFile, FileName);
+  Rewrite(CSVFile);
+
+  try
+    // Write column headers
+    Line := 'no; id_pinjam; nik; nama; periode; angsuran; utang; bayar; saldo';
+    Writeln(CSVFile, Line);
+
+    // Write data rows
+    qAngsur.First;
+    while not qAngsur.Eof do
+    begin
+      Line := '';
+      for i := 0 to qAngsur.FieldCount - 1 do
+      begin
+        Line := Line + qAngsur.Fields[i].AsString;
+        if i < qAngsur.FieldCount - 1 then
+          Line := Line + ';';
+      end;
+      Writeln(CSVFile, Line);
+      qAngsur.Next;
+    end;
+
+  finally
+    CloseFile(CSVFile);
+  end;
+end;
+
+end.

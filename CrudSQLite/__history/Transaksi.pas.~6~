@@ -1,0 +1,126 @@
+unit Transaksi;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Vcl.Bind.Grid, System.Rtti,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
+  Vcl.Bind.DBEngExt, Data.DB, FireDAC.Comp.DataSet, Data.Bind.Components,
+  Data.Bind.Grid, Vcl.Grids, FireDAC.Comp.Client, Data.Bind.DBScope,
+  Vcl.StdCtrls;
+
+type
+  Tform_transaksi = class(TForm)
+    sqliteConnect: TFDConnection;
+    BindSource_transaksiDetail: TBindSourceDB;
+    tableDetail: TFDTable;
+    strGrid_transaksiDetail: TStringGrid;
+    linkGrid_transaksiDetail: TLinkGridToDataSource;
+    bindList_transaksiDetail: TBindingsList;
+    tableDetail_idTransaksi: TIntegerField;
+    tableDetail_id: TFDAutoIncField;
+    tableDetail_idMaster: TIntegerField;
+    tableDetail_qty: TIntegerField;
+    bindSource_transaksiHeader: TBindSourceDB;
+    tableHeader: TFDTable;
+    strGrid_transaksiHeader: TStringGrid;
+    linkGrid_transaksiHeader: TLinkGridToDataSource;
+    tableHeader_id: TFDAutoIncField;
+    tableHeader_kodeTransaksi: TWideMemoField;
+    tableHeader_waktuTransaksi: TWideMemoField;
+    btnSave: TButton;
+    btnAdd: TButton;
+    btnUpdate: TButton;
+    btnDelete: TButton;
+    lblIdTransaksi: TLabel;
+    txtIdTransaksi: TEdit;
+    lblIdMaster: TLabel;
+    txtIdMaster: TEdit;
+    lblQty: TLabel;
+    txtQty: TEdit;
+    lblKodeTransaksi: TLabel;
+    txtKodeTransaksi: TEdit;
+    lblWaktu: TLabel;
+    txtWaktu: TEdit;
+    procedure btnAddClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure btnUpdateClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_transaksi: Tform_transaksi;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tform_transaksi.btnAddClick(Sender: TObject);
+begin
+  tableDetail.Append;
+  tableDetail_idTransaksi.AsInteger := StrToInt(txtIdTransaksi.Text);
+  tableDetail_idMaster.AsInteger := StrToInt(txtIdMaster.Text);
+  tableDetail_qty.AsInteger := StrToInt(txtQty.Text);
+  tableDetail.Post;
+  tableDetail.Refresh;
+
+  tableHeader.Append;
+  tableHeader_kodeTransaksi.AsString := txtKodeTransaksi.Text;
+  tableHeader_waktuTransaksi.AsString := txtWaktu.Text;
+  tableHeader.Post;
+  tableHeader.Refresh;
+
+  txtIdTransaksi.Clear;
+  txtIdMaster.Clear;
+  txtQty.Clear;
+  txtKodeTransaksi.Clear;
+  txtWaktu.Clear;
+end;
+
+procedure Tform_transaksi.btnDeleteClick(Sender: TObject);
+begin
+  tableDetail.Delete;
+  tableHeader.Delete;
+end;
+
+procedure Tform_transaksi.btnSaveClick(Sender: TObject);
+begin
+  tableHeader.Edit;
+  tableHeader_kodeTransaksi.AsString := txtKodeTransaksi.Text;
+  tableHeader_waktuTransaksi.AsString := txtWaktu.Text;
+  tableHeader.Post;
+
+  tableDetail.Edit;
+  tableDetail_idTransaksi.AsInteger := StrToInt(txtIdTransaksi.Text);
+  tableDetail_idMaster.AsInteger := StrToInt(txtIdMaster.Text);
+  tableDetail_qty.AsInteger := StrToInt(txtQty.Text);
+  tableDetail.Post;
+
+  txtIdTransaksi.Clear;
+  txtIdMaster.Clear;
+  txtQty.Clear;
+  txtKodeTransaksi.Clear;
+  txtWaktu.Clear;
+end;
+
+procedure Tform_transaksi.btnUpdateClick(Sender: TObject);
+begin
+  txtIdTransaksi.Text := IntToStr(tableDetail_idTransaksi.AsInteger);
+  txtIdMaster.Text := IntToStr(tableDetail_idMaster.AsInteger);
+  txtQty.Text := IntToStr(tableDetail_qty.AsInteger);
+  txtKodeTransaksi.Text := tableHeader_kodeTransaksi.Text;
+  txtWaktu.Text := tableHeader_waktuTransaksi.Text;
+end;
+
+end.

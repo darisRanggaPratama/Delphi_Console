@@ -1,0 +1,70 @@
+unit MainForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls;
+
+type
+  THome = class(TForm)
+    MainMenuForm: TMainMenu;
+    N1: TMenuItem;
+    inputPinjam: TMenuItem;
+    pageHome: TPageControl;
+    tabHome: TTabSheet;
+    tabData: TTabSheet;
+    gridAngsur: TDBGrid;
+    procedure inputPinjamClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Home: THome;
+
+implementation
+
+uses
+  Entry, dataModuleDB;
+
+{$R *.dfm}
+
+procedure THome.inputPinjamClick(Sender: TObject);
+begin
+  formEntry.Show;
+end;
+
+procedure THome.FormShow(Sender: TObject);
+begin
+  try
+  tabData.TabVisible := False;
+  tabHome.TabVisible := False;
+  pageHome.ActivePage := tabHome;
+    with myDataModule do
+    begin
+      with zConnect do
+      begin
+        HostName := 'localhost';
+        Port := 3306;
+        Database := 'pinjam';
+        LibraryLocation := ExtractFilePath(Application.ExeName) +
+          '\library\libmysql.dll';
+        User := 'rangga';
+        Password := 'rangga';
+        Connected := True;
+      end;
+      qAngsur_.Active := True;
+    end;
+  except
+
+  end;
+
+end;
+
+end.

@@ -1,0 +1,18 @@
+program Pinjaman;
+
+uses
+  Vcl.Forms,
+  MainForm in 'MainForm.pas' {Home},
+  Entry in 'Entry.pas' {formEntry},
+  dataModuleDB in 'dataModuleDB.pas' {DataModule1: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(THome, Home);
+  Application.CreateForm(TformEntry, formEntry);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.Run;
+end.

@@ -1,0 +1,49 @@
+unit Transaksi;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Vcl.Bind.Grid, System.Rtti,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
+  Vcl.Bind.DBEngExt, Data.DB, FireDAC.Comp.DataSet, Data.Bind.Components,
+  Data.Bind.Grid, Vcl.Grids, FireDAC.Comp.Client, Data.Bind.DBScope;
+
+type
+  Tform_transaksi = class(TForm)
+    sqliteConnect: TFDConnection;
+    BindSource_transaksiDetail: TBindSourceDB;
+    table_transaksiDetail: TFDTable;
+    strGrid_transaksiDetail: TStringGrid;
+    linkGrid_transaksiDetail: TLinkGridToDataSource;
+    bindList_transaksiDetail: TBindingsList;
+    detail_idTransaksi: TIntegerField;
+    detail_id: TFDAutoIncField;
+    detail_idMaster: TIntegerField;
+    detail_qty: TIntegerField;
+    bindSource_transaksiHeader: TBindSourceDB;
+    table_transaksiHeader: TFDTable;
+    strGrid_transaksiHeader: TStringGrid;
+    linkGrid_transaksiHeader: TLinkGridToDataSource;
+    header_id: TFDAutoIncField;
+    header_kodeTransaksi: TWideMemoField;
+    header_waktuTransaksi: TWideMemoField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_transaksi: Tform_transaksi;
+
+implementation
+
+{$R *.dfm}
+
+end.
