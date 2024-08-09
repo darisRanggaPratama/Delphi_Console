@@ -101,6 +101,7 @@ object formHome: TformHome
         ParentFont = False
         TabOrder = 1
         OnChange = txtSearchChange
+        ExplicitWidth = 603
       end
     end
   end

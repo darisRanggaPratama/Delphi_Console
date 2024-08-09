@@ -41,7 +41,7 @@ var
 implementation
 
 uses
-  MainForm;
+  MainForm, dataModuleDB;
 
 {$R *.dfm}
 
@@ -175,6 +175,7 @@ begin
       zConnect.Connect;
 
     ImportCSVToMySQL(ImportPath);
+    myDataModule.sourceAngsur.DataSet.Refresh;
     ShowMessage('Data imported successfully!');
     Self.Close;
     formHome.pageHome.ActivePage := formHome.tabData;

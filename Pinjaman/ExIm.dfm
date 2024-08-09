@@ -42,7 +42,7 @@ object formExIm: TformExIm
     object lblPeriod: TLabel
       Left = 12
       Top = 85
-      Width = 95
+      Width = 47
       Height = 18
       Caption = 'Period'
       Font.Charset = ANSI_CHARSET
@@ -55,7 +55,7 @@ object formExIm: TformExIm
     object lblPinjamID: TLabel
       Left = 12
       Top = 140
-      Width = 85
+      Width = 66
       Height = 18
       Caption = 'ID Pinjam'
       Font.Charset = ANSI_CHARSET
