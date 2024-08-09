@@ -22,11 +22,11 @@ object formHome: TformHome
     Top = 8
     Width = 770
     Height = 742
-    ActivePage = tabHome
+    ActivePage = tabData
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitWidth = 776
-    ExplicitHeight = 796
+    ExplicitWidth = 766
+    ExplicitHeight = 741
     object tabHome: TTabSheet
       Caption = 'tabHome'
       object lblHome: TLabel
@@ -56,13 +56,13 @@ object formHome: TformHome
       object lblSearch: TLabel
         Left = 29
         Top = 18
-        Width = 48
-        Height = 17
+        Width = 62
+        Height = 18
         Caption = 'SEARCH'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'JetBrains Mono NL'
+        Font.Height = -15
+        Font.Name = 'Arial'
         Font.Style = [fsBold]
         ParentFont = False
       end
@@ -73,6 +73,12 @@ object formHome: TformHome
         Height = 647
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = myDataModule.sourceAngsur
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -85,11 +91,16 @@ object formHome: TformHome
         Left = 152
         Top = 16
         Width = 607
-        Height = 23
+        Height = 28
         Anchors = [akLeft, akTop, akRight]
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 1
         OnChange = txtSearchChange
-        ExplicitWidth = 613
       end
     end
   end

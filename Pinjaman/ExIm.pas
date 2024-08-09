@@ -7,16 +7,25 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Data.DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
-  ZConnection;
+  ZConnection, Vcl.StdCtrls;
 
 type
   TformExIm = class(TForm)
-    btnExport: TSpeedButton;
     btnImport: TSpeedButton;
     zConnect: TZConnection;
     qAngsur: TZQuery;
+    GroupBox1: TGroupBox;
+    btnExportAll: TButton;
+    btnExpPeriod: TButton;
+    btnExpID: TButton;
+    lblPeriod: TLabel;
+    lblPinjamID: TLabel;
+    txtPeriod: TEdit;
+    txtPinjamID: TEdit;
     procedure btnImportClick(Sender: TObject);
-    procedure btnExportClick(Sender: TObject);
+    procedure btnExportAllClick(Sender: TObject);
+    procedure btnExpPeriodClick(Sender: TObject);
+    procedure btnExpIDClick(Sender: TObject);
   private
     { Private declarations }
     procedure ConnectToDB();
@@ -32,7 +41,7 @@ var
 implementation
 
 uses
-MainForm;
+  MainForm;
 
 {$R *.dfm}
 
@@ -52,17 +61,50 @@ begin
   end;
 end;
 
-procedure TformExIm.btnExportClick(Sender: TObject);
+procedure TformExIm.btnExpIDClick(Sender: TObject);
 begin
   // Set up the connection
- ConnectToDB();
+  ConnectToDB();
 
   try
     if not zConnect.Connected then
       zConnect.Connect;
 
     qAngsur.SQL.Clear;
-    qAngsur.SQL.Text := 'SELECT no, id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo FROM angsur';
+    qAngsur.SQL.Text :=
+      'SELECT no, id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo FROM angsur WHERE id_pinjam LIKE '
+      + QuotedStr('%' + txtPinjamID.Text + '%') + ' ORDER BY periode ASC';
+
+    if qAngsur.SQL.Text = '' then
+      raise Exception.Create('SQL Query is Empty');
+
+    qAngsur.Open;
+
+    // Export data to CSV
+    ExportDataToCSV(ExtractFilePath(Application.ExeName) +
+      '\export\angsur_per_idPinjam.csv');
+    ShowMessage('Data exported successfully!');
+    txtPinjamID.Clear;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TformExIm.btnExportAllClick(Sender: TObject);
+begin
+  // Set up the connection
+  ConnectToDB();
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    qAngsur.SQL.Clear;
+    qAngsur.SQL.Text :=
+      'SELECT no, id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo FROM angsur ORDER BY id_pinjam ASC, periode ASC';
 
     if qAngsur.SQL.Text = '' then
       raise Exception.Create('SQL Query is Empty');
@@ -73,6 +115,38 @@ begin
     ExportDataToCSV(ExtractFilePath(Application.ExeName) +
       '\export\angsur.csv');
     ShowMessage('Data exported successfully!');
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TformExIm.btnExpPeriodClick(Sender: TObject);
+begin
+  // Set up the connection
+  ConnectToDB();
+
+  try
+    if not zConnect.Connected then
+      zConnect.Connect;
+
+    qAngsur.SQL.Clear;
+    qAngsur.SQL.Text :=
+      'SELECT no, id_pinjam, nik, nama, periode, angsuran, utang, bayar, saldo FROM angsur WHERE periode LIKE '
+      + QuotedStr('%' + txtPeriod.Text + '%') + ' ORDER BY id_pinjam, nama';
+
+    if qAngsur.SQL.Text = '' then
+      raise Exception.Create('SQL Query is Empty');
+
+    qAngsur.Open;
+
+    // Export data to CSV
+    ExportDataToCSV(ExtractFilePath(Application.ExeName) +
+      '\export\angsur_per_period.csv');
+    ShowMessage('Data exported successfully!');
+    txtPeriod.Clear;
   except
     on E: Exception do
     begin
@@ -93,7 +167,7 @@ begin
     Exit;
   end;
 
-   // Set up the connection
+  // Set up the connection
   ConnectToDB();
 
   try

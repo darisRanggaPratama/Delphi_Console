@@ -23,7 +23,6 @@ type
     menuData: TMenuItem;
     importExport: TMenuItem;
 
-
     procedure inputPinjamClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure gridAngsurDblClick(Sender: TObject);
@@ -64,7 +63,7 @@ end;
 
 procedure TformHome.importExportClick(Sender: TObject);
 begin
-       formExIm.Show;
+  formExIm.Show;
 end;
 
 procedure TformHome.inputPinjamClick(Sender: TObject);
@@ -111,4 +110,5 @@ begin
   except
   end;
 end;
+
 end.

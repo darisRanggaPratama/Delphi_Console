@@ -124,7 +124,7 @@ object formEntry: TformEntry
     Height = 22
     Caption = 'SAVE'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlue
+    Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -138,7 +138,7 @@ object formEntry: TformEntry
     Height = 22
     Caption = 'EDIT'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlue
+    Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -152,7 +152,7 @@ object formEntry: TformEntry
     Height = 22
     Caption = 'DELETE'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlue
+    Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -166,7 +166,7 @@ object formEntry: TformEntry
     Height = 22
     Caption = 'CLEAR'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlue
+    Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]

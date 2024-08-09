@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/08 20:15:54.000.570,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/08 20:17:43.000.934,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\CrudSqliteContact\FormMain.dfm</Transaction>
+    <Transaction>2024/08/08 20:17:43.000.934,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\CrudSqliteContact\FormMain.pas</Transaction>
+    <Transaction>2024/08/08 20:18:00.000.310,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\CrudSqliteContact\ContactApp.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

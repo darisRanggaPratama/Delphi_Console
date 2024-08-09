@@ -1,0 +1,160 @@
+object formExIm: TformExIm
+  Left = 0
+  Top = 0
+  Caption = 'Export-Import'
+  ClientHeight = 416
+  ClientWidth = 584
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  TextHeight = 15
+  object btnImport: TSpeedButton
+    Left = 201
+    Top = 326
+    Width = 165
+    Height = 61
+    Caption = 'IMPORT FROM CSV'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlue
+    Font.Height = -16
+    Font.Name = 'JetBrains Mono NL'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnImportClick
+  end
+  object btnExport: TSpeedButton
+    Left = 372
+    Top = 337
+    Width = 165
+    Height = 61
+    Caption = 'EXPORT TO CSV'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlue
+    Font.Height = -16
+    Font.Name = 'JetBrains Mono NL'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnExportClick
+  end
+  object GroupBox1: TGroupBox
+    Left = 22
+    Top = 17
+    Width = 515
+    Height = 243
+    Caption = 'EXPORT'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    object lblPeriod: TLabel
+      Left = 3
+      Top = 85
+      Width = 76
+      Height = 18
+      Caption = 'Period'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblPinjamID: TLabel
+      Left = 3
+      Top = 140
+      Width = 66
+      Height = 18
+      Caption = 'ID Pinjam'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnExportAll: TButton
+      Left = 321
+      Top = 21
+      Width = 150
+      Height = 38
+      Caption = 'Export All Data'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnExportAllClick
+    end
+    object btnExpPeriod: TButton
+      Left = 321
+      Top = 76
+      Width = 150
+      Height = 38
+      Caption = 'Export Per Periode'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnExpPeriodClick
+    end
+    object btnExpID: TButton
+      Left = 321
+      Top = 131
+      Width = 150
+      Height = 38
+      Caption = 'Export Per ID'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object txtPeriod: TEdit
+      Left = 113
+      Top = 81
+      Width = 160
+      Height = 27
+      TabOrder = 3
+    end
+    object txtPinjamID: TEdit
+      Left = 113
+      Top = 136
+      Width = 160
+      Height = 27
+      TabOrder = 4
+    end
+  end
+  object zConnect: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    DisableSavepoints = False
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'pinjam'
+    User = 'rangga'
+    Password = 'rangga'
+    Protocol = 'mysql'
+    Left = 102
+    Top = 285
+  end
+  object qAngsur: TZQuery
+    Connection = zConnect
+    Params = <>
+    Left = 103
+    Top = 360
+  end
+end
