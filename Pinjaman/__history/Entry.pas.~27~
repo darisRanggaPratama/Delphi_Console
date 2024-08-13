@@ -1,0 +1,286 @@
+unit Entry;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls;
+
+type
+  TformEntry = class(TForm)
+    lblKode: TLabel;
+    txtKode: TEdit;
+    lblNik: TLabel;
+    txtNik: TEdit;
+    lblNama: TLabel;
+    txtNama: TEdit;
+    lblPeriode: TLabel;
+    txtPeriode: TEdit;
+    lblAngsur: TLabel;
+    txtAngsur: TEdit;
+    lblUtang: TLabel;
+    txtUtang: TEdit;
+    lblBayar: TLabel;
+    txtBayar: TEdit;
+    lblSaldo: TLabel;
+    txtSaldo: TEdit;
+    btnSave: TSpeedButton;
+    btnEdit: TSpeedButton;
+    btnDelete: TSpeedButton;
+    btnClear: TSpeedButton;
+    procedure PressEnter(Sender: TObject; var Key: Char);
+    procedure btnClearClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure txtKodeDblClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formEntry: TformEntry;
+
+implementation
+
+uses
+  dataModuleDB, MainForm;
+
+{$R *.dfm}
+
+procedure TformEntry.btnClearClick(Sender: TObject);
+begin
+  txtKode.Clear;
+  txtNik.Clear;
+  txtNama.Clear;
+  txtPeriode.Clear;
+  txtAngsur.Clear;
+  txtUtang.Clear;
+  txtBayar.Clear;
+  txtSaldo.Clear;
+  txtKode.SetFocus;
+end;
+
+procedure TformEntry.btnDeleteClick(Sender: TObject);
+begin
+  if ((Trim(txtKode.Text) = '') and (Trim(txtNik.Text) = '') and
+    (Trim(txtNama.Text) = '') and (Trim(txtPeriode.Text) = '') and
+    (Trim(txtAngsur.Text) = '') and (Trim(txtUtang.Text) = '') and
+    (Trim(txtBayar.Text) = '') and (Trim(txtSaldo.Text) = '')) then
+  begin
+    Beep;
+    MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
+      Exit;
+  end
+  else
+  begin
+    if MessageDlg('Apakah anda yakin menghapus data ini?',
+      TMsgDlgType.mtInformation, [TMsgDlgBtn.mbNo, TMsgDlgBtn.mbOK], 0) = mrOk
+    then
+    begin
+      with myDataModule do
+      begin
+        qAngsur_.Edit;
+        qAngsur_.Delete;
+        MessageDlg('Data berhasil dihapus', TMsgDlgType.mtInformation,
+          [TMsgDlgBtn.mbOK], 0);
+        btnClearClick(Sender);
+      end;
+    end
+    else
+      Exit;
+  end
+end;
+
+procedure TformEntry.btnEditClick(Sender: TObject);
+begin
+  if ((Trim(txtKode.Text) = '') and (Trim(txtNik.Text) = '') and
+    (Trim(txtNama.Text) = '') and (Trim(txtPeriode.Text) = '') and
+    (Trim(txtAngsur.Text) = '') and (Trim(txtUtang.Text) = '') and
+    (Trim(txtBayar.Text) = '') and (Trim(txtSaldo.Text) = '')) then
+  begin
+    Beep;
+    MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
+      Exit;
+  end
+  else
+  begin
+    if MessageDlg('Apakah anda yakin mengubah data ini?',
+      TMsgDlgType.mtInformation, [TMsgDlgBtn.mbNo, TMsgDlgBtn.mbOK], 0) = mrOk
+    then
+    begin
+      with myDataModule do
+      begin
+        qAngsur_.Edit;
+        qAngsur_idPinjam.AsString := txtKode.Text;
+        qAngsur_nik.AsString := txtNik.Text;
+        qAngsur_nama.AsString := txtNama.Text;
+        qAngsur_periode.AsString := txtPeriode.Text;
+        qAngsur_angsuran.AsInteger := StrToInt(txtAngsur.Text);
+        qAngsur_utang.AsInteger := StrToInt(txtUtang.Text);
+        qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
+        qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
+        qAngsur_.Post;
+        MessageDlg('Data berhasil diubah', TMsgDlgType.mtInformation,
+          [TMsgDlgBtn.mbOK], 0);
+        btnClearClick(Sender);
+        Self.Close;
+        formHome.pageHome.ActivePage := formHome.tabData;
+      end;
+    end
+    else
+      Exit;
+  end
+end;
+
+procedure TformEntry.btnSaveClick(Sender: TObject);
+begin
+  if Trim(txtKode.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Kode Pinjaman wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtKode.SetFocus;
+  end
+  else if Trim(txtNik.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('NIK Karyawan wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtNik.SetFocus;
+  end
+  else if Trim(txtNama.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Nama Karyawan wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtNama.SetFocus;
+  end
+  else if Trim(txtPeriode.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Periode Pinjaman wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtPeriode.SetFocus;
+  end
+  else if Trim(txtAngsur.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Angsuran Pinjaman wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtAngsur.SetFocus;
+  end
+  else if Trim(txtUtang.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Nominal Pinjaman wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtUtang.SetFocus;
+  end
+  else if Trim(txtBayar.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Nominal Bayar wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtBayar.SetFocus;
+  end
+  else if Trim(txtSaldo.Text) = '' then
+  begin
+    Beep;
+    MessageDlg('Saldo Pinjaman wajib diisi', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbNo], 0);
+    txtSaldo.SetFocus;
+  end
+  else if myDataModule.qAngsur_.Locate('id_pinjam', txtKode.Text, []) then
+  begin
+    Beep;
+    MessageDlg('Kode Pinjaman sudah terdaftar', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbOK], 0);
+    txtNik.Text := myDataModule.qAngsur_nik.AsString;
+    txtNama.Text := myDataModule.qAngsur_nama.AsString;
+    txtPeriode.Text := myDataModule.qAngsur_periode.AsString;
+    txtAngsur.Text := IntToStr(myDataModule.qAngsur_angsuran.AsInteger);
+    txtUtang.Text := IntToStr(myDataModule.qAngsur_utang.AsInteger);
+    txtBayar.Text := IntToStr(myDataModule.qAngsur_bayar.AsInteger);
+    txtSaldo.Text := IntToStr(myDataModule.qAngsur_saldo.AsInteger);
+  end
+  else
+  begin
+    with myDataModule do
+    begin
+      qAngsur_.Append;
+      qAngsur_idPinjam.AsString := txtKode.Text;
+      qAngsur_nik.AsString := txtNik.Text;
+      qAngsur_nama.AsString := txtNama.Text;
+      qAngsur_periode.AsString := txtPeriode.Text;
+      qAngsur_angsuran.AsInteger := StrToInt(txtAngsur.Text);
+      qAngsur_utang.AsInteger := StrToInt(txtUtang.Text);
+      qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
+      qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
+      qAngsur_.Post;
+
+      MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0);
+      btnClearClick(Sender);
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
+      Exit;
+    end;
+  end;
+end;
+
+procedure TformEntry.PressEnter(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+  begin
+    if Sender = txtKode then
+      txtNik.SetFocus;
+    if Sender = txtNik then
+      txtNama.SetFocus;
+
+    if Sender = txtNama then
+      txtPeriode.SetFocus;
+    if Sender = txtPeriode then
+      txtAngsur.SetFocus;
+
+    if Sender = txtAngsur then
+      txtUtang.SetFocus;
+    if Sender = txtUtang then
+      txtBayar.SetFocus;
+
+    if Sender = txtBayar then
+      txtSaldo.SetFocus;
+    if Sender = txtSaldo then
+      txtKode.SetFocus;
+
+  end;
+
+end;
+
+procedure TformEntry.txtKodeDblClick(Sender: TObject);
+begin
+  if myDataModule.qAngsur_.Locate('id_pinjam', txtKode.Text, []) then
+  begin
+    Beep;
+    MessageDlg('Kode Pinjaman ditampilkan', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbOK], 0);
+    txtNik.Text := myDataModule.qAngsur_nik.AsString;
+    txtNama.Text := myDataModule.qAngsur_nama.AsString;
+    txtPeriode.Text := myDataModule.qAngsur_periode.AsString;
+    txtAngsur.Text := IntToStr(myDataModule.qAngsur_angsuran.AsInteger);
+    txtUtang.Text := IntToStr(myDataModule.qAngsur_utang.AsInteger);
+    txtBayar.Text := IntToStr(myDataModule.qAngsur_bayar.AsInteger);
+    txtSaldo.Text := IntToStr(myDataModule.qAngsur_saldo.AsInteger);
+  end
+end;
+
+end.

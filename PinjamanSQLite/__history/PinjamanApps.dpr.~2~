@@ -1,0 +1,14 @@
+program PinjamanApps;
+
+uses
+  Vcl.Forms,
+  MainForm in 'MainForm.pas' {formHome};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TformHome, formHome);
+  Application.Run;
+end.

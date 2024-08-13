@@ -25,7 +25,7 @@ object myDataModule: TmyDataModule
       'SELECT * FROM angsur ORDER BY id_pinjam DESC, periode ASC;')
     Params = <>
     Left = 97
-    Top = 161
+    Top = 160
     object qAngsur_no: TZWordField
       FieldName = 'no'
       Required = True

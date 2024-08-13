@@ -1,0 +1,104 @@
+unit Entry;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TformEntry = class(TForm)
+    lblKode: TLabel;
+    txtKode: TEdit;
+    lblNIK: TLabel;
+    txtNIK: TEdit;
+    lblNama: TLabel;
+    txtNama: TEdit;
+    lblPeriode: TLabel;
+    txtPeriode: TEdit;
+    lblAngsur: TLabel;
+    txtAngsur: TEdit;
+    lblUtang: TLabel;
+    txtUtang: TEdit;
+    lblBayar: TLabel;
+    txtBayar: TEdit;
+    lblSaldo: TLabel;
+    txtSaldo: TEdit;
+    btnSave: TButton;
+    btnEdit: TButton;
+    btnClear: TButton;
+    btnDelete: TButton;
+    procedure btnClearClick(Sender: TObject);
+    procedure txtKodeKeyPress(Sender: TObject; var Key: Char);
+    procedure txtKodeDblClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formEntry: TformEntry;
+
+implementation
+
+uses
+  DataModuleDB, MainForm;
+
+{$R *.dfm}
+
+procedure TformEntry.btnClearClick(Sender: TObject);
+begin
+  txtKode.Clear;
+  txtNIK.Clear;
+  txtNama.Clear;
+  txtPeriode.Clear;
+  txtAngsur.Clear;
+  txtUtang.Clear;
+  txtBayar.Clear;
+  txtSaldo.Clear;
+  txtKode.SetFocus;
+end;
+
+procedure TformEntry.txtKodeDblClick(Sender: TObject);
+begin
+  if myDataModule.qAngsur_.Locate('id_pinjam', txtKode.Text, []) then
+  begin
+    Beep;
+    MessageDlg('Kode Pinjaman ditampilkan', TMsgDlgType.mtWarning,
+      [TMsgDlgBtn.mbOK], 0);
+    txtNIK.Text := myDataModule.qAngsur_nik.AsString;
+    txtNama.Text := myDataModule.qAngsur_nama.AsString;
+
+  end;
+end;
+
+procedure TformEntry.txtKodeKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+  begin
+    if Sender = txtKode then
+      txtNIK.SetFocus;
+    if Sender = txtNIK then
+      txtNama.SetFocus;
+
+    if Sender = txtNama then
+      txtPeriode.SetFocus;
+    if Sender = txtPeriode then
+      txtAngsur.SetFocus;
+
+    if Sender = txtAngsur then
+      txtUtang.SetFocus;
+    if Sender = txtUtang then
+      txtBayar.SetFocus;
+
+    if Sender = txtBayar then
+      txtSaldo.SetFocus;
+    if Sender = txtSaldo then
+      txtKode.SetFocus;
+  end;
+end;
+
+end.

@@ -1,0 +1,64 @@
+unit UploadDownload;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ZConnection, Data.DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
+  Vcl.StdCtrls;
+
+type
+  Tform_uploadDownload = class(TForm)
+    qTest: TZQuery;
+
+    btnExport: TButton;
+    procedure btnCSVClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_uploadDownload: Tform_uploadDownload;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tform_uploadDownload.btnCSVClick(Sender: TObject);
+var
+  exportFile: TextFile;
+begin
+  zConns.Protocol := 'sqlite';
+  zConns.Database := ExtractFilePath(Application.ExeName) + 'testdb.s3db';
+  zConns.LibraryLocation := ExtractFilePath(Application.ExeName) + 'sqlite3.dll';
+  zConns.Connected := True;
+
+  qTest.Connection := zConns;
+  qTest.SQL.Text := 'SELECT firstName, lastName FROM testtbl';
+  qTest.Open;
+
+  AssignFile(exportFile, 'name_export.csv');
+  Rewrite(exportFile);
+
+  try
+    Writeln(exportFile, 'firstname', 'lastname');
+
+    while not qTest.Eof do
+    begin
+      Write(exportFile, qTest.FieldByName('firstname').AsString + ';');
+      Write(exportFile, qTest.FieldByName('lastname').AsString);
+    end;
+    ShowMessage('Data Export successfully');
+  finally
+    CloseFile(exportFile);
+    qTest.Close;
+    zConns.Connected := False;
+  end;
+end;
+
+end.

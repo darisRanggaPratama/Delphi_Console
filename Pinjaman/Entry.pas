@@ -74,9 +74,9 @@ begin
     Beep;
     MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
       [TMsgDlgBtn.mbOK], 0);
-      Self.Close;
-      formHome.pageHome.ActivePage := formHome.tabData;
-      Exit;
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
   end
   else
   begin
@@ -108,9 +108,9 @@ begin
     Beep;
     MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
       [TMsgDlgBtn.mbOK], 0);
-      Self.Close;
-      formHome.pageHome.ActivePage := formHome.tabData;
-      Exit;
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
   end
   else
   begin
@@ -227,14 +227,13 @@ begin
       qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
       qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
       qAngsur_.Post;
-
-      MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
-        [TMsgDlgBtn.mbOK], 0);
-      btnClearClick(Sender);
-      Self.Close;
-      formHome.pageHome.ActivePage := formHome.tabData;
-      Exit;
     end;
+    MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+    btnClearClick(Sender);
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
   end;
 end;
 

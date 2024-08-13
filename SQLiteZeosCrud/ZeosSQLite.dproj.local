@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/10 08:04:05.000.377,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/10 08:04:52.000.964,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\SQLiteZeosCrud\MainForm.dfm</Transaction>
+    <Transaction>2024/08/10 08:04:52.000.964,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\SQLiteZeosCrud\MainForm.pas</Transaction>
+    <Transaction>2024/08/10 08:05:15.000.025,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\SQLiteZeosCrud\ZeosSQLite.dproj</Transaction>
+    <Transaction>2024/08/11 10:41:15.000.839,=D:\up2github\Delphi_Console\SQLiteZeosCrud\Unit1.pas</Transaction>
+    <Transaction>2024/08/11 10:42:22.000.136,D:\up2github\Delphi_Console\SQLiteZeosCrud\Unit1.dfm=D:\up2github\Delphi_Console\SQLiteZeosCrud\UploadDownload.dfm</Transaction>
+    <Transaction>2024/08/11 10:42:22.000.136,D:\up2github\Delphi_Console\SQLiteZeosCrud\Unit1.pas=D:\up2github\Delphi_Console\SQLiteZeosCrud\UploadDownload.pas</Transaction>
+  </Transactions>
+</BorlandProject>

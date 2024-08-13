@@ -1,0 +1,32 @@
+unit DataModuleDB;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection;
+
+type
+  TmyDataModule = class(TDataModule)
+    connect: TZConnection;
+    qAngsur_: TZQuery;
+    sourceAngsur: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  myDataModule: TmyDataModule;
+
+implementation
+
+uses
+DataModuleDB, ExIm, Entry;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.
