@@ -2,17 +2,17 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2024/08/12 07:28:41.000.685,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/08/12 07:29:59.000.782,D:\up2github\Delphi_Console\PinjamanSQLite\MainForm.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2024/08/12 07:29:59.000.782,D:\up2github\Delphi_Console\PinjamanSQLite\MainForm.pas=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/08/12 07:30:18.000.835,D:\up2github\Delphi_Console\PinjamanSQLite\PinjamanApps.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/08/12 07:29:59.000.782,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\MainForm.dfm</Transaction>
+    <Transaction>2024/08/12 07:29:59.000.782,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\PinjamanSQLite\MainForm.pas</Transaction>
+    <Transaction>2024/08/12 07:30:18.000.835,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\PinjamanSQLite\PinjamanApps.dproj</Transaction>
     <Transaction>2024/08/12 07:51:05.000.338,=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas</Transaction>
-    <Transaction>2024/08/12 07:51:17.000.676,D:\up2github\Delphi_Console\PinjamanSQLite\Entry.pas=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas</Transaction>
-    <Transaction>2024/08/12 07:51:17.000.676,D:\up2github\Delphi_Console\PinjamanSQLite\Entry.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.dfm</Transaction>
+    <Transaction>2024/08/12 07:51:17.000.676,D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\Entry.dfm</Transaction>
+    <Transaction>2024/08/12 07:51:17.000.676,D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas=D:\up2github\Delphi_Console\PinjamanSQLite\Entry.pas</Transaction>
     <Transaction>2024/08/12 07:51:25.000.330,=D:\up2github\Delphi_Console\PinjamanSQLite\Unit2.pas</Transaction>
-    <Transaction>2024/08/12 07:51:33.000.362,D:\up2github\Delphi_Console\PinjamanSQLite\ExIm.pas=D:\up2github\Delphi_Console\PinjamanSQLite\Unit2.pas</Transaction>
-    <Transaction>2024/08/12 07:51:33.000.362,D:\up2github\Delphi_Console\PinjamanSQLite\ExIm.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\Unit2.dfm</Transaction>
+    <Transaction>2024/08/12 07:51:33.000.362,D:\up2github\Delphi_Console\PinjamanSQLite\Unit2.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\ExIm.dfm</Transaction>
+    <Transaction>2024/08/12 07:51:33.000.362,D:\up2github\Delphi_Console\PinjamanSQLite\Unit2.pas=D:\up2github\Delphi_Console\PinjamanSQLite\ExIm.pas</Transaction>
     <Transaction>2024/08/12 07:51:45.000.845,=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas</Transaction>
-    <Transaction>2024/08/12 07:52:07.000.686,D:\up2github\Delphi_Console\PinjamanSQLite\DataModuleDB.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.dfm</Transaction>
-    <Transaction>2024/08/12 07:52:07.000.686,D:\up2github\Delphi_Console\PinjamanSQLite\DataModuleDB.pas=D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas</Transaction>
+    <Transaction>2024/08/12 07:52:07.000.686,D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.dfm=D:\up2github\Delphi_Console\PinjamanSQLite\DataModuleDB.dfm</Transaction>
+    <Transaction>2024/08/12 07:52:07.000.686,D:\up2github\Delphi_Console\PinjamanSQLite\Unit1.pas=D:\up2github\Delphi_Console\PinjamanSQLite\DataModuleDB.pas</Transaction>
   </Transactions>
 </BorlandProject>
