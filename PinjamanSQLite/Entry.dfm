@@ -257,6 +257,7 @@ object formEntry: TformEntry
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 9
+    OnClick = btnEditClick
   end
   object btnClear: TButton
     Left = 292
@@ -286,5 +287,6 @@ object formEntry: TformEntry
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 11
+    OnClick = btnDeleteClick
   end
 end

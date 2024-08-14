@@ -33,6 +33,8 @@ type
     procedure txtKodeKeyPress(Sender: TObject; var Key: Char);
     procedure txtKodeDblClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -61,6 +63,87 @@ begin
   txtBayar.Clear;
   txtSaldo.Clear;
   txtKode.SetFocus;
+end;
+
+procedure TformEntry.btnDeleteClick(Sender: TObject);
+begin
+  if ((Trim(txtKode.Text) = '') and (Trim(txtNIK.Text) = '') and
+    (Trim(txtNama.Text) = '') and (Trim(txtPeriode.Text) = '') and
+    (Trim(txtAngsur.Text) = '') and (Trim(txtUtang.Text) = '') and
+    (Trim(txtBayar.Text) = '') and (Trim(txtSaldo.Text) = '')) then
+  begin
+    Beep;
+    MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
+  end
+  else
+  begin
+    if MessageDlg('Apakah anda yakin menghapus data ini?',
+      TMsgDlgType.mtInformation, [TMsgDlgBtn.mbNo, TMsgDlgBtn.mbOK], 0) = mrOk
+    then
+    begin
+      with myDataModule do
+      begin
+        qAngsur_.Edit;
+        qAngsur_.Delete;
+        sourceAngsur.DataSet.Refresh;
+      end;
+      MessageDlg('Data berhasil dihapus', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0);
+      btnClearClick(Sender);
+      formHome.pageHome.ActivePage := formHome.tabHome;
+    end
+    else
+      Exit;
+  end
+end;
+
+procedure TformEntry.btnEditClick(Sender: TObject);
+begin
+  if ((Trim(txtKode.Text) = '') and (Trim(txtNIK.Text) = '') and
+    (Trim(txtNama.Text) = '') and (Trim(txtPeriode.Text) = '') and
+    (Trim(txtAngsur.Text) = '') and (Trim(txtUtang.Text) = '') and
+    (Trim(txtBayar.Text) = '') and (Trim(txtSaldo.Text) = '')) then
+  begin
+    Beep;
+    MessageDlg('Silakan pilih data terlebih dahulu', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
+  end
+  else
+  begin
+    if MessageDlg('Apakah anda yakin mengubah data ini?',
+      TMsgDlgType.mtInformation, [TMsgDlgBtn.mbNo, TMsgDlgBtn.mbOK], 0) = mrOk
+    then
+    begin
+      with myDataModule do
+      begin
+        qAngsur_.Edit;
+        qAngsur_idPinjam.AsString := txtKode.Text;
+        qAngsur_nik.AsString := txtNIK.Text;
+        qAngsur_nama.AsString := txtNama.Text;
+        qAngsur_periode.AsString := txtPeriode.Text;
+        qAngsur_angsuran.AsInteger := StrToInt(txtAngsur.Text);
+        qAngsur_utang.AsInteger := StrToInt(txtUtang.Text);
+        qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
+        qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
+        qAngsur_.Post;
+        sourceAngsur.DataSet.Refresh;
+      end;
+      MessageDlg('Data berhasil diubah', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0);
+      btnClearClick(Sender);
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
+    end
+    else
+      Exit;
+  end
 end;
 
 procedure TformEntry.btnSaveClick(Sender: TObject);
@@ -148,15 +231,15 @@ begin
       qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
       qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
       qAngsur_.Post;
-
-      MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
-        [TMsgDlgBtn.mbOK], 0);
-      btnClearClick(Sender);
-      Self.Close;
-      formHome.pageHome.ActivePage := formHome.tabData;
+      sourceAngsur.DataSet.Refresh;
     end;
-
-  end;;
+    MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
+      [TMsgDlgBtn.mbOK], 0);
+    btnClearClick(Sender);
+    Self.Close;
+    formHome.pageHome.ActivePage := formHome.tabData;
+    Exit;
+  end;
 end;
 
 procedure TformEntry.txtKodeDblClick(Sender: TObject);

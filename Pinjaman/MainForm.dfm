@@ -86,6 +86,69 @@ object formHome: TformHome
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
         OnDblClick = gridAngsurDblClick
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'no'
+            Width = 20
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'id_pinjam'
+            Width = 50
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'nik'
+            Width = 50
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nama'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'periode'
+            Width = 85
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'angsuran'
+            Width = 85
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'utang'
+            Width = 85
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'bayar'
+            Width = 85
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'saldo'
+            Width = 85
+            Visible = True
+          end>
       end
       object txtSearch: TEdit
         Left = 152

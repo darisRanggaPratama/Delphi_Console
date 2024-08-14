@@ -107,7 +107,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ExIm.pas">
-            <Form>Form2</Form>
+            <Form>formExIm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="DataModuleDB.pas">

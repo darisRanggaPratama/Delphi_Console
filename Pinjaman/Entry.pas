@@ -88,10 +88,12 @@ begin
       begin
         qAngsur_.Edit;
         qAngsur_.Delete;
-        MessageDlg('Data berhasil dihapus', TMsgDlgType.mtInformation,
-          [TMsgDlgBtn.mbOK], 0);
-        btnClearClick(Sender);
+        sourceAngsur.DataSet.Refresh;
       end;
+      MessageDlg('Data berhasil dihapus', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0);
+      btnClearClick(Sender);
+      formHome.pageHome.ActivePage := formHome.tabData;
     end
     else
       Exit;
@@ -130,12 +132,13 @@ begin
         qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
         qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
         qAngsur_.Post;
-        MessageDlg('Data berhasil diubah', TMsgDlgType.mtInformation,
-          [TMsgDlgBtn.mbOK], 0);
-        btnClearClick(Sender);
-        Self.Close;
-        formHome.pageHome.ActivePage := formHome.tabData;
+        sourceAngsur.DataSet.Refresh;
       end;
+      MessageDlg('Data berhasil diubah', TMsgDlgType.mtInformation,
+        [TMsgDlgBtn.mbOK], 0);
+      btnClearClick(Sender);
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
     end
     else
       Exit;
@@ -227,6 +230,7 @@ begin
       qAngsur_bayar.AsInteger := StrToInt(txtBayar.Text);
       qAngsur_saldo.AsInteger := StrToInt(txtSaldo.Text);
       qAngsur_.Post;
+      sourceAngsur.DataSet.Refresh;
     end;
     MessageDlg('Save record successfully', TMsgDlgType.mtInformation,
       [TMsgDlgBtn.mbOK], 0);

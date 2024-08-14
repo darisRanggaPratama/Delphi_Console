@@ -14,7 +14,7 @@ type
     btnImport: TSpeedButton;
     zConnect: TZConnection;
     qAngsur: TZQuery;
-    GroupBox1: TGroupBox;
+    gBoxExport: TGroupBox;
     btnExportAll: TButton;
     btnExpPeriod: TButton;
     btnExpID: TButton;
@@ -113,7 +113,7 @@ begin
 
     // Export data to CSV
     ExportDataToCSV(ExtractFilePath(Application.ExeName) +
-      '\export\angsur.csv');
+      '\export\angsur_all.csv');
     ShowMessage('Data exported successfully!');
   except
     on E: Exception do

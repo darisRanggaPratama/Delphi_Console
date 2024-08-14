@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   MainForm in 'MainForm.pas' {formHome},
   Entry in 'Entry.pas' {formEntry},
-  ExIm in 'ExIm.pas' {Form2},
+  ExIm in 'ExIm.pas' {formExIm},
   DataModuleDB in 'DataModuleDB.pas' {myDataModule: TDataModule};
 
 {$R *.res}
@@ -14,7 +14,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TformHome, formHome);
   Application.CreateForm(TformEntry, formEntry);
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TformExIm, formExIm);
   Application.CreateForm(TmyDataModule, myDataModule);
   Application.Run;
 end.

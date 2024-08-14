@@ -12,6 +12,7 @@ object formHome: TformHome
   Font.Style = []
   Menu = menuHome
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
     777
@@ -24,8 +25,12 @@ object formHome: TformHome
     Height = 19
     Panels = <
       item
-        Alignment = taCenter
-        Text = 'DATABASE STATUS?'
+        Text = 'DATABASE ?'
+        Width = 550
+      end
+      item
+        Alignment = taRightJustify
+        Text = 'LIBRARY ?'
         Width = 50
       end>
     ExplicitTop = 736
@@ -36,7 +41,7 @@ object formHome: TformHome
     Top = -1
     Width = 777
     Height = 732
-    ActivePage = tabData
+    ActivePage = tabHome
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     ExplicitWidth = 773
@@ -85,12 +90,14 @@ object formHome: TformHome
         Width = 775
         Height = 608
         Anchors = [akLeft, akTop, akRight, akBottom]
+        DataSource = myDataModule.sourceAngsur
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        OnDblClick = gridAngsurDblClick
       end
       object txtSearch: TEdit
         Left = 136
@@ -112,17 +119,18 @@ object formHome: TformHome
   object menuHome: TMainMenu
     Left = 16
     Top = 704
-    object Form1: TMenuItem
+    object Form_submenu: TMenuItem
       Caption = 'Form'
       object InputPinjam1: TMenuItem
         Caption = 'Input Pinjam'
         OnClick = InputPinjam1Click
       end
     end
-    object Data1: TMenuItem
+    object Data_submenu: TMenuItem
       Caption = 'Data'
       object ExportImport1: TMenuItem
         Caption = 'Export-Import'
+        OnClick = ExportImport1Click
       end
     end
   end
