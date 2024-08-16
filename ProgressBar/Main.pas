@@ -79,6 +79,7 @@ end;
 
 procedure TformHome.connectDB();
 begin
+// Setting & Connecting to database
   zConnect.Database := ExtractFilePath(Application.ExeName) + 'testing.sqlite3';
   zConnect.Protocol := 'sqlite';
   zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +

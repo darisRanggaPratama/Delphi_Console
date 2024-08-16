@@ -2,8 +2,8 @@ object formHome: TformHome
   Left = 0
   Top = 0
   Caption = 'formHome'
-  ClientHeight = 440
-  ClientWidth = 620
+  ClientHeight = 441
+  ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,8 +13,8 @@ object formHome: TformHome
   Position = poScreenCenter
   WindowState = wsMaximized
   DesignSize = (
-    620
-    440)
+    624
+    441)
   TextHeight = 15
   object lblProgress: TLabel
     Left = 277
@@ -41,7 +41,7 @@ object formHome: TformHome
   object progress: TProgressBar
     Left = 30
     Top = 186
-    Width = 566
+    Width = 570
     Height = 17
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 1

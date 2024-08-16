@@ -40,6 +40,7 @@ var
   i: Integer;
   Fields: TArray<string>;
 begin
+  lblProgress.Caption := '0.0 %';
   connectDB();
   CSVFile := TStringList.Create;
   try
@@ -87,12 +88,12 @@ end;
 
 procedure TformHome.updateProgress(Current, Max: Integer);
 var
-  PercentDone: Integer;
+  PercentDone: Double;
 begin
   progress.Max := Max;
   progress.Position := Current;
-  PercentDone := Round((Current / Max) * 100);
-  lblProgress.Caption := Format('%d%%', [PercentDone]);
+  PercentDone := Current / (Max * 1000) * 100000;
+  lblProgress.Caption := Format('%f %%', [PercentDone]);
   Application.ProcessMessages; // Allow UI to update
 end;
 
