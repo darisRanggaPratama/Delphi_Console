@@ -12,7 +12,7 @@ type
   TformHome = class(TForm)
     MainMenuForm: TMainMenu;
     menuForm: TMenuItem;
-    inputPinjam: TMenuItem;
+    inputPinjam_sub: TMenuItem;
     pageHome: TPageControl;
     tabHome: TTabSheet;
     tabData: TTabSheet;
@@ -21,13 +21,16 @@ type
     txtSearch: TEdit;
     lblSearch: TLabel;
     menuData: TMenuItem;
-    importExport: TMenuItem;
+    importExport_sub: TMenuItem;
+    statBar: TStatusBar;
+    search_sub: TMenuItem;
 
-    procedure inputPinjamClick(Sender: TObject);
+    procedure inputPinjam_subClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure gridAngsurDblClick(Sender: TObject);
     procedure txtSearchChange(Sender: TObject);
-    procedure importExportClick(Sender: TObject);
+    procedure importExport_subClick(Sender: TObject);
+    procedure search_subClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -61,14 +64,19 @@ begin
   end;
 end;
 
-procedure TformHome.importExportClick(Sender: TObject);
+procedure TformHome.importExport_subClick(Sender: TObject);
 begin
   formExIm.Show;
 end;
 
-procedure TformHome.inputPinjamClick(Sender: TObject);
+procedure TformHome.inputPinjam_subClick(Sender: TObject);
 begin
   formEntry.Show;
+end;
+
+procedure TformHome.search_subClick(Sender: TObject);
+begin
+ pageHome.ActivePage := tabData;
 end;
 
 procedure TformHome.txtSearchChange(Sender: TObject);
@@ -79,6 +87,8 @@ begin
     begin
       SQL.Clear;
       SQL.Text := 'SELECT * FROM angsur WHERE nama LIKE ' +
+        QuotedStr('%' + txtSearch.Text + '%') + ' OR id_pinjam LIKE ' +
+        QuotedStr('%' + txtSearch.Text + '%') + ' OR periode LIKE ' +
         QuotedStr('%' + txtSearch.Text + '%') + ' ORDER BY id_pinjam';
       Open;
     end;
@@ -100,13 +110,16 @@ begin
         Port := 3306;
         Database := 'pinjam';
         LibraryLocation := ExtractFilePath(Application.ExeName) +
-          '\library\libmysql.dll';
+          'library\libmysql.dll';
         User := 'rangga';
         Password := 'rangga';
         Connected := True;
       end;
       qAngsur_.Active := True;
     end;
+    statBar.Panels[0].Text := 'Library: ' + ExtractFilePath(Application.ExeName)
+      + 'library\libmysql.dll';
+    statBar.Panels[1].Text := 'Aplikasi Pinjaman Karyawan';
   except
   end;
 end;

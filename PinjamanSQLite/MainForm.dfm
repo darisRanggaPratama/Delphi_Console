@@ -41,7 +41,7 @@ object formHome: TformHome
     Top = -1
     Width = 777
     Height = 732
-    ActivePage = tabHome
+    ActivePage = tabData
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     ExplicitWidth = 773
@@ -98,6 +98,61 @@ object formHome: TformHome
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
         OnDblClick = gridAngsurDblClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'no'
+            Width = 20
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'id_pinjam'
+            Width = 60
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nik'
+            Width = 60
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nama'
+            Width = 250
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'periode'
+            Width = 60
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'angsuran'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'utang'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'bayar'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'saldo'
+            Width = 100
+            Visible = True
+          end>
       end
       object txtSearch: TEdit
         Left = 136
@@ -105,6 +160,7 @@ object formHome: TformHome
         Width = 630
         Height = 27
         Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -113,24 +169,29 @@ object formHome: TformHome
         ParentFont = False
         TabOrder = 1
         OnChange = txtSearchChange
+        ExplicitWidth = 626
       end
     end
   end
   object menuHome: TMainMenu
-    Left = 16
-    Top = 704
+    Left = 52
+    Top = 625
     object Form_submenu: TMenuItem
       Caption = 'Form'
-      object InputPinjam1: TMenuItem
+      object InputPinjam_sub: TMenuItem
         Caption = 'Input Pinjam'
-        OnClick = InputPinjam1Click
+        OnClick = InputPinjam_subClick
       end
     end
     object Data_submenu: TMenuItem
       Caption = 'Data'
-      object ExportImport1: TMenuItem
+      object ExportImport_sub: TMenuItem
         Caption = 'Export-Import'
-        OnClick = ExportImport1Click
+        OnClick = ExportImport_subClick
+      end
+      object search_sub: TMenuItem
+        Caption = 'Search'
+        OnClick = search_subClick
       end
     end
   end

@@ -264,7 +264,6 @@ begin
       txtSaldo.SetFocus;
     if Sender = txtSaldo then
       txtKode.SetFocus;
-
   end;
 
 end;

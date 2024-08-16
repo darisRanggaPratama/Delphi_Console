@@ -55,7 +55,7 @@ begin
     Database := 'pinjam';
     Protocol := 'mysql';
     LibraryLocation := ExtractFilePath(Application.ExeName) +
-      '\library\libmysql.dll';
+      'library\libmysql.dll';
     User := 'rangga';
     Password := 'rangga';
   end;
@@ -82,7 +82,7 @@ begin
 
     // Export data to CSV
     ExportDataToCSV(ExtractFilePath(Application.ExeName) +
-      '\export\angsur_per_idPinjam.csv');
+      'export\angsur_per_idPinjam.csv');
     ShowMessage('Data exported successfully!');
     txtPinjamID.Clear;
   except
@@ -113,7 +113,7 @@ begin
 
     // Export data to CSV
     ExportDataToCSV(ExtractFilePath(Application.ExeName) +
-      '\export\angsur_all.csv');
+      'export\angsur_all.csv');
     ShowMessage('Data exported successfully!');
   except
     on E: Exception do
@@ -144,7 +144,7 @@ begin
 
     // Export data to CSV
     ExportDataToCSV(ExtractFilePath(Application.ExeName) +
-      '\export\angsur_per_period.csv');
+      'export\angsur_per_period.csv');
     ShowMessage('Data exported successfully!');
     txtPeriod.Clear;
   except
@@ -159,7 +159,7 @@ procedure TformExIm.btnImportClick(Sender: TObject);
 var
   ImportPath: string;
 begin
-  ImportPath := ExtractFilePath(Application.ExeName) + '\import\angsur.csv';
+  ImportPath := ExtractFilePath(Application.ExeName) + 'import\angsur.csv';
 
   if not FileExists(ImportPath) then
   begin

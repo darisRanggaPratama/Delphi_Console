@@ -2,7 +2,7 @@ object formHome: TformHome
   Left = 0
   Top = 0
   Caption = 'formHome'
-  ClientHeight = 758
+  ClientHeight = 764
   ClientWidth = 767
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,28 +12,29 @@ object formHome: TformHome
   Font.Style = []
   Menu = MainMenuForm
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
     767
-    758)
+    764)
   TextHeight = 15
   object pageHome: TPageControl
     Left = -3
     Top = 8
     Width = 770
-    Height = 742
-    ActivePage = tabData
+    Height = 757
+    ActivePage = tabHome
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
     ExplicitWidth = 766
-    ExplicitHeight = 741
+    ExplicitHeight = 756
     object tabHome: TTabSheet
       Caption = 'tabHome'
       object lblHome: TLabel
         Left = 0
         Top = 0
         Width = 762
-        Height = 712
+        Height = 708
         Align = alClient
         Alignment = taCenter
         Caption = 'DATA PIUTANG KARYAWAN'
@@ -46,13 +47,30 @@ object formHome: TformHome
         ExplicitWidth = 336
         ExplicitHeight = 36
       end
+      object statBar: TStatusBar
+        Left = 0
+        Top = 708
+        Width = 762
+        Height = 19
+        Panels = <
+          item
+            Text = 'Library ?'
+            Width = 1000
+          end
+          item
+            Text = 'Info ?'
+            Width = 50
+          end>
+        ExplicitTop = 707
+        ExplicitWidth = 758
+      end
     end
     object tabData: TTabSheet
       Caption = 'tabData'
       ImageIndex = 1
       DesignSize = (
         762
-        712)
+        727)
       object lblSearch: TLabel
         Left = 29
         Top = 18
@@ -70,7 +88,7 @@ object formHome: TformHome
         Left = 3
         Top = 64
         Width = 762
-        Height = 647
+        Height = 662
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = myDataModule.sourceAngsur
         Font.Charset = ANSI_CHARSET
@@ -155,6 +173,7 @@ object formHome: TformHome
         Top = 16
         Width = 607
         Height = 28
+        Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -164,7 +183,6 @@ object formHome: TformHome
         ParentFont = False
         TabOrder = 1
         OnChange = txtSearchChange
-        ExplicitWidth = 603
       end
     end
   end
@@ -173,16 +191,20 @@ object formHome: TformHome
     Top = 444
     object menuForm: TMenuItem
       Caption = 'Form'
-      object inputPinjam: TMenuItem
+      object inputPinjam_sub: TMenuItem
         Caption = 'Input Pinjam'
-        OnClick = inputPinjamClick
+        OnClick = inputPinjam_subClick
       end
     end
     object menuData: TMenuItem
       Caption = 'Data'
-      object importExport: TMenuItem
+      object importExport_sub: TMenuItem
         Caption = 'Export-Import'
-        OnClick = importExportClick
+        OnClick = importExport_subClick
+      end
+      object search_sub: TMenuItem
+        Caption = 'Search'
+        OnClick = search_subClick
       end
     end
   end

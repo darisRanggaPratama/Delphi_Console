@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/16 05:35:08.000.117,=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/16 05:36:08.000.966,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\up2github\Delphi_Console\ProgressBar\Main.dfm</Transaction>
+    <Transaction>2024/08/16 05:36:08.000.966,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\up2github\Delphi_Console\ProgressBar\Main.pas</Transaction>
+    <Transaction>2024/08/16 05:36:23.000.077,C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\up2github\Delphi_Console\ProgressBar\ProgressBar.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

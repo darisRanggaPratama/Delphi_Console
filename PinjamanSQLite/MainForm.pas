@@ -16,18 +16,20 @@ type
     tabData: TTabSheet;
     menuHome: TMainMenu;
     Form_submenu: TMenuItem;
-    InputPinjam1: TMenuItem;
+    InputPinjam_sub: TMenuItem;
     Data_submenu: TMenuItem;
-    ExportImport1: TMenuItem;
+    ExportImport_sub: TMenuItem;
     lblHome: TLabel;
     gridAngsur: TDBGrid;
     lblSearch: TLabel;
     txtSearch: TEdit;
+    search_sub: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure txtSearchChange(Sender: TObject);
-    procedure InputPinjam1Click(Sender: TObject);
+    procedure InputPinjam_subClick(Sender: TObject);
     procedure gridAngsurDblClick(Sender: TObject);
-    procedure ExportImport1Click(Sender: TObject);
+    procedure ExportImport_subClick(Sender: TObject);
+    procedure search_subClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,16 +46,16 @@ uses
 
 {$R *.dfm}
 
-procedure TformHome.ExportImport1Click(Sender: TObject);
+procedure TformHome.ExportImport_subClick(Sender: TObject);
 begin
-formExIm.Show;
+  formExIm.Show;
 end;
 
 procedure TformHome.FormShow(Sender: TObject);
 begin
   try
-    tabData.Visible := False;
-    tabHome.Visible := False;
+    tabData.TabVisible := False;
+    tabHome.TabVisible := False;
     pageHome.ActivePage := tabHome;
 
     with myDataModule do
@@ -61,14 +63,18 @@ begin
       with connect do
       begin
         Protocol := 'sqlite';
-        Database := ExtractFilePath(Application.ExeName) + 'database\pinjam.s3db';
-        LibraryLocation := ExtractFilePath(Application.ExeName) + 'library\sqlite3.dll';
+        Database := ExtractFilePath(Application.ExeName) +
+          'database\pinjam.s3db';
+        LibraryLocation := ExtractFilePath(Application.ExeName) +
+          'library\sqlite3.dll';
         Connected := True;
       end;
       qAngsur_.Active := True;
     end;
-    statusDB.Panels[0].Text := 'Database: ' + ExtractFilePath(Application.ExeName) + 'database\pinjam.s3db';
-    statusDB.Panels[1].Text := 'Library: ' + ExtractFilePath(Application.ExeName) + 'database\sqlite3.dll';
+    statusDB.Panels[0].Text := 'Database: ' +
+      ExtractFilePath(Application.ExeName) + 'database\pinjam.s3db';
+    statusDB.Panels[1].Text := 'Library: ' +
+      ExtractFilePath(Application.ExeName) + 'database\sqlite3.dll';
   except
   end;
 end;
@@ -89,9 +95,14 @@ begin
   end;
 end;
 
-procedure TformHome.InputPinjam1Click(Sender: TObject);
+procedure TformHome.InputPinjam_subClick(Sender: TObject);
 begin
   formEntry.Show;
+end;
+
+procedure TformHome.search_subClick(Sender: TObject);
+begin
+  pageHome.ActivePage := tabData;
 end;
 
 procedure TformHome.txtSearchChange(Sender: TObject);
