@@ -1,0 +1,28 @@
+object myDataModule: TmyDataModule
+  Height = 389
+  Width = 303
+  object connect: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    DisableSavepoints = False
+    HostName = ''
+    Port = 0
+    Database = ''
+    User = ''
+    Password = ''
+    Protocol = 'sqlite'
+    Left = 42
+    Top = 34
+  end
+  object qAngsur_: TZQuery
+    Connection = connect
+    Params = <>
+    Left = 46
+    Top = 129
+  end
+  object sourceAngsur: TDataSource
+    DataSet = qAngsur_
+    Left = 58
+    Top = 224
+  end
+end

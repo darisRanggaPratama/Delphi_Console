@@ -1,0 +1,177 @@
+object formExIm: TformExIm
+  Left = 0
+  Top = 0
+  Caption = 'Export'
+  ClientHeight = 397
+  ClientWidth = 546
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  TextHeight = 15
+  object gBoxExport: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 530
+    Height = 171
+    Caption = 'Export'
+    DefaultHeaderFont = False
+    HeaderFont.Charset = ANSI_CHARSET
+    HeaderFont.Color = clBlue
+    HeaderFont.Height = -15
+    HeaderFont.Name = 'JetBrains Mono'
+    HeaderFont.Style = [fsBold]
+    TabOrder = 0
+    object lblPeriod: TLabel
+      Left = 15
+      Top = 75
+      Width = 63
+      Height = 19
+      Caption = 'Periode'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblIDPinjam: TLabel
+      Left = 15
+      Top = 126
+      Width = 81
+      Height = 19
+      Caption = 'ID Pinjam'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = []
+      ParentFont = False
+    end
+    object txtPeriod: TEdit
+      Left = 136
+      Top = 72
+      Width = 165
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object txtIDPinjam: TEdit
+      Left = 136
+      Top = 123
+      Width = 165
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object btnExportAll: TButton
+      Left = 353
+      Top = 26
+      Width = 160
+      Height = 30
+      Caption = 'Export All'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object btnExportPerPeriod: TButton
+      Left = 353
+      Top = 71
+      Width = 160
+      Height = 30
+      Caption = 'Export Per Period'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object btnExportPerID: TButton
+      Left = 353
+      Top = 122
+      Width = 160
+      Height = 30
+      Caption = 'Export Per ID'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'JetBrains Mono NL'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+    end
+  end
+  object btnImport: TButton
+    Left = 361
+    Top = 197
+    Width = 160
+    Height = 30
+    Caption = 'Import'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'JetBrains Mono'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnImportClick
+  end
+  object btnTestImport: TButton
+    Left = 361
+    Top = 257
+    Width = 160
+    Height = 45
+    Caption = 'btnTestImport'
+    TabOrder = 2
+    OnClick = btnTestImportClick
+  end
+  object btnTestExport: TButton
+    Left = 361
+    Top = 308
+    Width = 160
+    Height = 45
+    Caption = 'btnTestExport'
+    TabOrder = 3
+    OnClick = btnTestExportClick
+  end
+  object zConnect: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    DisableSavepoints = False
+    HostName = ''
+    Port = 0
+    Database = ''
+    User = ''
+    Password = ''
+    Protocol = 'sqlite'
+    Left = 12
+    Top = 190
+  end
+  object qAngsur: TZQuery
+    Connection = zConnect
+    SQL.Strings = (
+      'SELECT * FROM angsur ORDER BY id_pinjam DESC, periode ASC;')
+    Params = <>
+    Left = 93
+    Top = 186
+  end
+end
