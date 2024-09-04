@@ -2,8 +2,8 @@ object formHome: TformHome
   Left = 0
   Top = 0
   Caption = 'formHome'
-  ClientHeight = 756
-  ClientWidth = 777
+  ClientHeight = 755
+  ClientWidth = 773
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,13 +15,13 @@ object formHome: TformHome
   WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
-    777
-    756)
+    773
+    755)
   TextHeight = 15
   object statusDB: TStatusBar
     Left = 0
-    Top = 737
-    Width = 777
+    Top = 736
+    Width = 773
     Height = 19
     Panels = <
       item
@@ -33,25 +33,21 @@ object formHome: TformHome
         Text = 'LIBRARY ?'
         Width = 50
       end>
-    ExplicitTop = 736
-    ExplicitWidth = 773
   end
   object pageHome: TPageControl
     Left = 0
     Top = -1
-    Width = 777
-    Height = 732
+    Width = 773
+    Height = 731
     ActivePage = tabData
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 773
-    ExplicitHeight = 731
     object tabHome: TTabSheet
       Caption = 'Home'
       object lblHome: TLabel
         Left = 0
         Top = 666
-        Width = 769
+        Width = 208
         Height = 36
         Align = alBottom
         Alignment = taCenter
@@ -62,15 +58,14 @@ object formHome: TformHome
         Font.Name = 'JetBrains Mono'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 208
       end
     end
     object tabData: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
       DesignSize = (
-        769
-        702)
+        765
+        701)
       object lblSearch: TLabel
         Left = 52
         Top = 32
@@ -87,8 +82,8 @@ object formHome: TformHome
       object gridAngsur: TDBGrid
         Left = -4
         Top = 98
-        Width = 775
-        Height = 608
+        Width = 771
+        Height = 607
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = myDataModule.sourceAngsur
         TabOrder = 0
@@ -157,7 +152,7 @@ object formHome: TformHome
       object txtSearch: TEdit
         Left = 136
         Top = 32
-        Width = 630
+        Width = 626
         Height = 27
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -169,7 +164,6 @@ object formHome: TformHome
         ParentFont = False
         TabOrder = 1
         OnChange = txtSearchChange
-        ExplicitWidth = 626
       end
     end
   end

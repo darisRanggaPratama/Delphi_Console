@@ -18,7 +18,7 @@ object formExIm: TformExIm
   object lblProgress: TLabel
     Left = 8
     Top = 185
-    Width = 78
+    Width = 32
     Height = 36
     Caption = '--'
     Font.Charset = ANSI_CHARSET
@@ -31,7 +31,7 @@ object formExIm: TformExIm
   object gBoxExport: TGroupBox
     Left = 8
     Top = 8
-    Width = 526
+    Width = 522
     Height = 171
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Export'
@@ -42,7 +42,7 @@ object formExIm: TformExIm
     HeaderFont.Name = 'JetBrains Mono'
     HeaderFont.Style = [fsBold]
     TabOrder = 0
-    ExplicitWidth = 522
+    ExplicitWidth = 518
     ExplicitHeight = 170
     object lblPeriod: TLabel
       Left = 15
@@ -111,6 +111,7 @@ object formExIm: TformExIm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      OnClick = btnExportAllClick
     end
     object btnExportPerPeriod: TButton
       Left = 353
@@ -125,6 +126,7 @@ object formExIm: TformExIm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnClick = btnExportPerPeriodClick
     end
     object btnExportPerID: TButton
       Left = 353
@@ -139,12 +141,13 @@ object formExIm: TformExIm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
+      OnClick = btnExportPerIDClick
     end
   end
   object btnImport: TButton
     Left = 361
     Top = 197
-    Width = 156
+    Width = 152
     Height = 30
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Import'
@@ -156,7 +159,7 @@ object formExIm: TformExIm
     ParentFont = False
     TabOrder = 1
     OnClick = btnImportClick
-    ExplicitWidth = 152
+    ExplicitWidth = 148
     ExplicitHeight = 29
   end
   object progress: TProgressBar
@@ -178,5 +181,12 @@ object formExIm: TformExIm
     Protocol = 'sqlite'
     Left = 186
     Top = 24
+  end
+  object qAngsur: TZQuery
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 273
+    Top = 23
   end
 end

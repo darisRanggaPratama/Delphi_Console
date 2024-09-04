@@ -23,7 +23,11 @@ type
     zConnect: TZConnection;
     lblProgress: TLabel;
     progress: TProgressBar;
+    qAngsur: TZQuery;
     procedure btnImportClick(Sender: TObject);
+    procedure btnExportAllClick(Sender: TObject);
+    procedure btnExportPerPeriodClick(Sender: TObject);
+    procedure btnExportPerIDClick(Sender: TObject);
   private
     { Private declarations }
     procedure connectToDB();
@@ -38,7 +42,7 @@ var
 implementation
 
 uses
-  MainForm, System.IOUtils;
+  MainForm, DataModuleDB, System.IOUtils;
 
 {$R *.dfm}
 
@@ -50,7 +54,7 @@ begin
   zConnect.Protocol := 'sqlite';
   zConnect.LibraryLocation := ExtractFilePath(Application.ExeName) +
     'library\sqlite3.dll';
-    zConnect.Connect;
+  zConnect.Connect;
 end;
 
 procedure TformExIm.updateProgress(Current: Integer; Max: Integer);
@@ -64,11 +68,152 @@ begin
   Application.ProcessMessages;
 end;
 
+procedure TformExIm.btnExportAllClick(Sender: TObject);
+var
+  CSVFile: TStringList;
+  row: Integer;
+
+begin
+  connectToDB();
+  CSVFile := TStringList.Create;
+  qAngsur := TZQuery.Create(nil);
+  try
+    qAngsur.Connection := zConnect;
+    qAngsur.SQL.Text :=
+      'SELECT id_pinjam,nik,nama,periode,angsuran,utang,bayar,saldo FROM angsur ORDER BY id_pinjam, periode';
+    qAngsur.Open;
+
+    // Add header
+    CSVFile.Add('id_pinjam;nik;nama;periode;angsuran;utang;bayar;saldo');
+
+    qAngsur.First;
+    row := 0;
+    while not qAngsur.Eof do
+    begin
+      CSVFile.Add(Format('%s;%s;%s;%s;%s;%s;%s;%s',
+        [qAngsur.FieldByName('id_pinjam').AsString, qAngsur.FieldByName('nik')
+        .AsString, qAngsur.FieldByName('nama').AsString,
+        qAngsur.FieldByName('periode').AsString, qAngsur.FieldByName('angsuran')
+        .AsString, qAngsur.FieldByName('utang').AsString,
+        qAngsur.FieldByName('bayar').AsString, qAngsur.FieldByName('saldo')
+        .AsString]));
+
+      Inc(row);
+      updateProgress(row, qAngsur.RecordCount);
+
+      qAngsur.Next;
+    end;
+
+    CSVFile.SaveToFile(ExtractFilePath(Application.ExeName) +
+      'export\export_data_all.csv');
+    ShowMessage('Proses export sudah selesai');
+    txtPeriod.Clear;
+  finally
+    CSVFile.Free;
+    qAngsur.Free;
+  end;
+end;
+
+procedure TformExIm.btnExportPerIDClick(Sender: TObject);
+var
+  CSVFile: TStringList;
+  row: Integer;
+
+begin
+  connectToDB();
+  CSVFile := TStringList.Create;
+  qAngsur := TZQuery.Create(nil);
+  try
+    qAngsur.Connection := zConnect;
+    qAngsur.SQL.Text :=
+      'SELECT id_pinjam,nik,nama,periode,angsuran,utang,bayar,saldo FROM angsur WHERE id_pinjam LIKE '
+      + QuotedStr('%' + txtIDPinjam.Text + '%') + ' ORDER BY periode ASC';
+    qAngsur.Open;
+
+    // Add header
+    CSVFile.Add('id_pinjam;nik;nama;periode;angsuran;utang;bayar;saldo');
+
+    qAngsur.First;
+    row := 0;
+    while not qAngsur.Eof do
+    begin
+      CSVFile.Add(Format('%s;%s;%s;%s;%s;%s;%s;%s',
+        [qAngsur.FieldByName('id_pinjam').AsString, qAngsur.FieldByName('nik')
+        .AsString, qAngsur.FieldByName('nama').AsString,
+        qAngsur.FieldByName('periode').AsString, qAngsur.FieldByName('angsuran')
+        .AsString, qAngsur.FieldByName('utang').AsString,
+        qAngsur.FieldByName('bayar').AsString, qAngsur.FieldByName('saldo')
+        .AsString]));
+
+      Inc(row);
+      updateProgress(row, qAngsur.RecordCount);
+
+      qAngsur.Next;
+    end;
+
+    CSVFile.SaveToFile(ExtractFilePath(Application.ExeName) +
+      'export\export_data_perID.csv');
+    ShowMessage('Proses export per periode sudah selesai');
+    txtIDPinjam.Clear;
+  finally
+    CSVFile.Free;
+    qAngsur.Free;
+  end;
+end;
+
+procedure TformExIm.btnExportPerPeriodClick(Sender: TObject);
+var
+  CSVFile: TStringList;
+  row: Integer;
+
+begin
+  connectToDB();
+  CSVFile := TStringList.Create;
+  qAngsur := TZQuery.Create(nil);
+  try
+    qAngsur.Connection := zConnect;
+    qAngsur.SQL.Text :=
+      'SELECT id_pinjam,nik,nama,periode,angsuran,utang,bayar,saldo FROM angsur WHERE periode LIKE '
+      + QuotedStr('%' + txtPeriod.Text + '%') + ' ORDER BY nama ASC';
+    qAngsur.Open;
+
+    // Add header
+    CSVFile.Add('id_pinjam;nik;nama;periode;angsuran;utang;bayar;saldo');
+
+    qAngsur.First;
+    row := 0;
+    while not qAngsur.Eof do
+    begin
+      CSVFile.Add(Format('%s;%s;%s;%s;%s;%s;%s;%s',
+        [qAngsur.FieldByName('id_pinjam').AsString, qAngsur.FieldByName('nik')
+        .AsString, qAngsur.FieldByName('nama').AsString,
+        qAngsur.FieldByName('periode').AsString, qAngsur.FieldByName('angsuran')
+        .AsString, qAngsur.FieldByName('utang').AsString,
+        qAngsur.FieldByName('bayar').AsString, qAngsur.FieldByName('saldo')
+        .AsString]));
+
+      Inc(row);
+      updateProgress(row, qAngsur.RecordCount);
+
+      qAngsur.Next;
+    end;
+
+    CSVFile.SaveToFile(ExtractFilePath(Application.ExeName) +
+      'export\export_data_perperiod.csv');
+    ShowMessage('Proses export per periode sudah selesai');
+    txtPeriod.Clear;
+  finally
+    CSVFile.Free;
+    qAngsur.Free;
+  end;
+end;
+
 procedure TformExIm.btnImportClick(Sender: TObject);
 var
   CSVFile: TStringList;
-  i: Integer;
+  row: Integer;
   Fields: TArray<string>;
+
 begin
   lblProgress.Caption := '0.0 %';
   connectToDB();
@@ -81,9 +226,9 @@ begin
 
     zConnect.StartTransaction;
     try
-      for i := 1 to CSVFile.Count - 1 do
+      for row := 1 to CSVFile.Count - 1 do
       begin
-        Fields := CSVFile[i].Split([';']);
+        Fields := CSVFile[row].Split([';']);
         if Length(Fields) = 8 then
         begin
           zConnect.ExecuteDirect
@@ -91,10 +236,13 @@ begin
             [Fields[0], Fields[1], Fields[2], Fields[3], Fields[4], Fields[5],
             Fields[6], Fields[7]]));
         end;
-        updateProgress(i, CSVFile.Count - 1);
+        updateProgress(row, CSVFile.Count - 1);
       end;
       zConnect.Commit;
+      myDataModule.sourceAngsur.DataSet.Refresh;
       ShowMessage('Import successfully');
+      Self.Close;
+      formHome.pageHome.ActivePage := formHome.tabData;
     except
       on E: Exception do
       begin
