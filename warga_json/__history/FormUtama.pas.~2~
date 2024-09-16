@@ -1,0 +1,53 @@
+unit FormUtama;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, System.JSON, IdHTTP;
+
+type
+  Tform_utama = class(TForm)
+    strGridData: TStringGrid;
+    btnSave: TButton;
+    btnRefresh: TButton;
+  private
+    { Private declarations }
+    procedure AturKolom;
+    procedure TampilData;
+  public
+    { Public declarations }
+  end;
+
+var
+  form_utama: Tform_utama;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tform_utama.AturKolom;
+begin
+strGridData.RowCount := 2;
+strGridData.Cells[0, 0] := 'No';
+strGridData.Cells[1, 0] := 'Id';
+strGridData.Cells[2, 0] := 'Nama';
+strGridData.Cells[3, 0] := 'Jenis Kelamin';
+strGridData.Cells[4, 0] := 'Telepon';
+
+strGridData.ColWidths[0] := 40;
+strGridData.ColWidths[1] := 0;
+strGridData.ColWidths[2] := 200;
+strGridData.ColWidths[3] := 100;
+strGridData.ColWidths[4] := 100;
+strGridData.FixedCols := 0;
+
+
+end;
+
+procedure Tform_utama.TampilData;
+begin
+
+end;
+
+end.

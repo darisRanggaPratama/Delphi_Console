@@ -1,0 +1,85 @@
+unit FormEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, IdHTTP, System.JSON;
+
+type
+  Tform_edit = class(TForm)
+    grpInsert: TGroupBox;
+    lblNama: TLabel;
+    lblGender: TLabel;
+    lblTelp: TLabel;
+    txtNama: TEdit;
+    txtTelp: TEdit;
+    comGender: TComboBox;
+    btnEdit: TButton;
+    txtID: TEdit;
+    lblID: TLabel;
+    procedure btnEditClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_edit: Tform_edit;
+
+implementation
+
+uses
+  FormUtama;
+
+{$R *.dfm}
+
+procedure Tform_edit.btnEditClick(Sender: TObject);
+var
+  htp: TIdHTTP;
+  jso: TJSONObject;
+  url: string;
+  sts: integer;
+  lst: TStringList;
+  psn: string;
+
+begin
+  htp := TIdHTTP.Create(nil);
+  lst := TStringList.Create;
+  lst.Add('id=' + txtID.Text);
+  lst.Add('nama=' + txtNama.Text);
+  lst.Add('jk=' + comGender.Text);
+  lst.Add('telp=' + txtTelp.Text);
+
+  url := 'http://localhost/crud_json_delphi/edit.php';
+
+  try
+    url := htp.Post(url, lst);
+  finally
+    FreeAndNil(htp);
+    lst.Free;
+  end;
+
+  jso := TJSONObject.ParseJSONValue(url) as TJSONObject;
+  psn := jso.GetValue('pesan').Value;
+  sts := StrToInt(jso.GetValue('value').Value);
+
+  if sts = 1 then
+  begin
+    MessageDlg(psn, TMsgDlgType.mtInformation, [TMsgDlgBtn.mbOK], 0);
+    form_utama.btnRefresh.Click;
+    Self.Close;
+
+  end
+  else
+  begin
+
+    MessageDlg(psn, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
+  end;
+  jso.Free;
+
+end;
+
+end.

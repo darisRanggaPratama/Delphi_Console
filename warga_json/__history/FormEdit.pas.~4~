@@ -1,0 +1,64 @@
+unit FormEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, IdHTTP, System.JSON;
+
+type
+  Tform_edit = class(TForm)
+    grpInsert: TGroupBox;
+    lblNama: TLabel;
+    lblGender: TLabel;
+    lblTelp: TLabel;
+    txtNama: TEdit;
+    txtTelp: TEdit;
+    comGender: TComboBox;
+    btnEdit: TButton;
+    txtID: TEdit;
+    lblID: TLabel;
+    procedure btnEditClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_edit: Tform_edit;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tform_edit.btnEditClick(Sender: TObject);
+var
+  htp: TIdHTTP;
+  jso: TJSONObject;
+  url: string;
+  sts: integer;
+  lst: TStringList;
+  psn : string;
+
+begin
+  htp := TIdHTTP.Create(nil);
+  lst := TStringList.Create;
+  url := 'http://localhost/crud_json_delphi/edit.php';
+
+  try
+    url := htp.Post(url, lst);
+  finally
+    FreeAndNil(htp);
+    lst.Free;
+  end;
+
+  jso := TJSONObject.ParseJSONValue(url) as  TJSONObject;
+  psn := jso.GetValue('pesan').Value;
+  sts := jso.GetValue('value').Value;
+
+end;
+
+
+end.

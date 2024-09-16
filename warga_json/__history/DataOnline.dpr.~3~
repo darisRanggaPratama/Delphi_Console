@@ -1,0 +1,17 @@
+program DataOnline;
+
+uses
+  Vcl.Forms,
+  FormUtama in 'FormUtama.pas' {form_utama},
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Cyan Dusk');
+  Application.CreateForm(Tform_utama, form_utama);
+  Application.Run;
+end.
