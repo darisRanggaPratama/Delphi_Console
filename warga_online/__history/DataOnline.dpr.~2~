@@ -1,0 +1,14 @@
+program DataOnline;
+
+uses
+  Vcl.Forms,
+  FormUtama in 'FormUtama.pas' {form_utama};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tform_utama, form_utama);
+  Application.Run;
+end.

@@ -1,0 +1,116 @@
+unit FormUtama;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, System.JSON, IdHTTP;
+
+type
+  Tform_utama = class(TForm)
+    strGridData: TStringGrid;
+    btnSave: TButton;
+    btnRefresh: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+
+
+    procedure strGridDataDblClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure AturKolom;
+    procedure TampilData;
+  public
+    { Public declarations }
+  end;
+
+var
+  form_utama: Tform_utama;
+
+implementation
+
+uses
+FormInsert, FormEdit;
+
+{$R *.dfm}
+
+procedure Tform_utama.AturKolom();
+begin
+strGridData.RowCount := 2;
+strGridData.Cells[0, 0] := 'No';
+strGridData.Cells[1, 0] := 'Id';
+strGridData.Cells[2, 0] := 'Nama';
+strGridData.Cells[3, 0] := 'Jenis Kelamin';
+strGridData.Cells[4, 0] := 'Telepon';
+
+strGridData.ColWidths[0] := 40;
+strGridData.ColWidths[1] := 0;
+strGridData.ColWidths[2] := 200;
+strGridData.ColWidths[3] := 100;
+strGridData.ColWidths[4] := 100;
+strGridData.FixedCols := 0;
+end;
+
+procedure Tform_utama.btnRefreshClick(Sender: TObject);
+begin
+TampilData();
+end;
+
+procedure Tform_utama.btnSaveClick(Sender: TObject);
+begin
+form_insert.ShowModal;
+end;
+
+procedure Tform_utama.FormShow(Sender: TObject);
+begin
+AturKolom();
+end;
+
+procedure Tform_utama.strGridDataDblClick(Sender: TObject);
+begin
+form_edit.txtID.Text := strGridData.Cells[1, strGridData.Row];
+form_edit.txtNama.Text := strGridData.Cells[2, strGridData.Row];
+form_edit.comGender.Text := strGridData.Cells[3, strGridData.Row];
+form_edit.txtTelp.Text := strGridData.Cells[4, strGridData.Row];
+form_edit.ShowModal;
+end;
+
+procedure Tform_utama.TampilData();
+var
+htp: TIdHTTP;
+jso: TJSONObject;
+jss: TJSONObject;
+jsa: TJSONArray;
+url: string;
+iii: Integer;
+
+begin
+htp := TIdHTTP.Create(nil);
+url := 'http://localhost/crud_json_delphi/view.php';
+
+try
+    url := htp.Get(url);
+finally
+      FreeAndNil(htp);
+end;
+
+jso := TJSONObject.ParseJSONValue(url) as TJSONObject;
+jsa := jso.GetValue('result') as TJSONArray;
+
+strGridData.RowCount := jsa.Count + 1;
+for iii := 0 to jsa.Count - 1 do
+  begin
+    jss := jsa.Get(iii) as TJSONObject;
+    // untuk nomor urut
+    strGridData.Cells[0, iii + 1] := Format('%d', [iii + 1]);
+    strGridData.Cells[1, iii + 1] := jss.GetValue('id').Value;
+    strGridData.Cells[2, iii + 1] := jss.GetValue('nama').Value;
+    strGridData.Cells[3, iii + 1] := jss.GetValue('jk').Value;
+    strGridData.Cells[4, iii + 1] := jss.GetValue('telp').Value;
+  end;
+
+    jso.Free;
+end;
+
+end.

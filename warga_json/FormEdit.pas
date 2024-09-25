@@ -57,7 +57,7 @@ begin
     lst := TStringList.Create;
     lst.Add('id=' + txtID.Text);
 
-    url := 'http://localhost/crud_json_delphi/delete.php';
+    url := 'http://localhost/console_php/crud_json_delphi/delete.php';
 
     try
       url := htp.Post(url, lst);
@@ -106,7 +106,7 @@ begin
   lst.Add('jk=' + comGender.Text);
   lst.Add('telp=' + txtTelp.Text);
 
-  url := 'http://localhost/crud_json_delphi/edit.php';
+  url := 'http://localhost/console_php/crud_json_delphi/edit.php';
 
   try
     url := htp.Post(url, lst);

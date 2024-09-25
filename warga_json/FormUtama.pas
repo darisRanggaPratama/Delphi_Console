@@ -87,7 +87,7 @@ iii: Integer;
 
 begin
 htp := TIdHTTP.Create(nil);
-url := 'http://localhost/crud_json_delphi/view.php';
+url := 'http://localhost/console_php/crud_json_delphi/view.php';
 
 try
     url := htp.Get(url);

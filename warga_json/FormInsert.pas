@@ -53,7 +53,7 @@ begin
   lst.Add('jk=' + comGender.Text);
   lst.Add('telp=' + txtTelp.Text);
 
-  url := 'http://localhost/crud_json_delphi/save.php';
+  url := 'http://localhost/console_php/crud_json_delphi/save.php';
 
   try
     url := htp.Post(url, lst);

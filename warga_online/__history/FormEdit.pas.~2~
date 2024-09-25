@@ -1,0 +1,34 @@
+unit FormEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  Tform_edit = class(TForm)
+    grpInsert: TGroupBox;
+    lblNama: TLabel;
+    lblGender: TLabel;
+    lblTelp: TLabel;
+    txtNama: TEdit;
+    txtTelp: TEdit;
+    comGender: TComboBox;
+    btnEdit: TButton;
+    txtID: TEdit;
+    lblID: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_edit: Tform_edit;
+
+implementation
+
+{$R *.dfm}
+
+end.

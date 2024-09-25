@@ -1,0 +1,114 @@
+object form_insert: Tform_insert
+  Left = 0
+  Top = 0
+  Caption = 'Insert Data'
+  ClientHeight = 324
+  ClientWidth = 626
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesktopCenter
+  OnShow = FormShow
+  TextHeight = 15
+  object grpInsert: TGroupBox
+    Left = 20
+    Top = 19
+    Width = 578
+    Height = 241
+    Caption = 'Insert Data'
+    TabOrder = 0
+    object lblNama: TLabel
+      Left = 39
+      Top = 39
+      Width = 40
+      Height = 21
+      Caption = 'Nama'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'JetBrains Mono'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblGender: TLabel
+      Left = 39
+      Top = 85
+      Width = 60
+      Height = 21
+      Caption = 'Gender'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'JetBrains Mono'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblTelp: TLabel
+      Left = 39
+      Top = 136
+      Width = 70
+      Height = 21
+      Caption = 'Telepon'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'JetBrains Mono'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object txtNama: TEdit
+      Left = 200
+      Top = 29
+      Width = 293
+      Height = 29
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'JetBrains Mono'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object txtTelp: TEdit
+      Left = 200
+      Top = 128
+      Width = 293
+      Height = 29
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'JetBrains Mono'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object comGender: TComboBox
+      Left = 200
+      Top = 83
+      Width = 146
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Pria'
+        'Wanita')
+    end
+  end
+  object btnSave: TButton
+    Left = 523
+    Top = 266
+    Width = 75
+    Height = 25
+    Caption = 'SAVE'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'JetBrains Mono'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnSaveClick
+  end
+end
