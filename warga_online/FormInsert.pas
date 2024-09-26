@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.JSON, IdHTTP;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.JSON,
+  System.Net.HttpClient, System.Net.URLClient, System.Net.HttpClientComponent,
+  IdURI;
 
 type
   Tform_insert = class(TForm)
@@ -32,53 +34,77 @@ var
 implementation
 
 uses
-FormUtama;
+  FormUtama;
 
 {$R *.dfm}
 
 procedure Tform_insert.btnSaveClick(Sender: TObject);
 var
   url: string;
-  htp: TIdHTTP;
-  jso: TJSONObject;
-  sts: Integer;
-  lst: TStringList;
-  psn: string;
+  HttpClient: TNetHTTPClient;
+  content: TStringStream;
+  response: IHTTPResponse;
+  jsonResponse: TJSONObject;
+  status: Integer;
+  messages: string;
+  postData: TStringList;
 
 begin
-  htp := TIdHTTP.Create(nil);
-  lst := TStringList.Create;
-  // Mengirim data dengan metode POST ke file PHP
-  lst.Add('nama=' + txtNama.Text);
-  lst.Add('jk=' + comGender.Text);
-  lst.Add('telp=' + txtTelp.Text);
-
-  url := 'http://localhost/console_php/crud_json_delphi/save.php';
+  HttpClient := TNetHTTPClient.Create(nil);
+  postData := TStringList.Create;
 
   try
-    url := htp.Post(url, lst);
+    // Mengirim data dengan metode POST ke file PHP
+    postData.Add('nama=' + TIdURI.ParamsEncode(txtNama.Text));
+    postData.Add('jk=' + TIdURI.ParamsEncode(comGender.Text));
+    postData.Add('telp=' + TIdURI.ParamsEncode(txtTelp.Text));
 
+    url := 'https://hyvoy.com/crud_json_delphi/save.php';
+
+    // Membuat konten POST
+    content := TStringStream.Create(postData.Text, TEncoding.UTF8);
+
+    try
+      response := HttpClient.Post(url, content, nil,
+        [TNameValuePair.Create('Content-Type',
+        'application/x-www-form-urlencoded')]);
+
+      if response.StatusCode = 200 then
+      begin
+        jsonResponse := TJSONObject.ParseJSONValue(response.ContentAsString)
+          as TJSONObject;
+        try
+          status := StrToInt(jsonResponse.GetValue('value').Value);
+          messages := jsonResponse.GetValue('pesan').Value;
+
+          if status = 1 then
+          begin
+            MessageDlg(messages, TMsgDlgType.mtInformation,
+              [TMsgDlgBtn.mbOK], 0);
+            clearForm();
+            form_utama.btnRefresh.Click;
+            Self.Close;
+          end
+          else
+          begin
+            MessageDlg(messages, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
+          end;
+        finally
+          jsonResponse.Free;
+        end;
+      end
+      else
+      begin
+        ShowMessage('Error: ' + response.StatusCode.ToString + ' ' +
+          response.StatusText);
+      end;
+    finally
+      content.Free;
+    end;
   finally
-    FreeAndNil(htp);
-    lst.Free;
-
+    HttpClient.Free;
+    postData.Free;
   end;
-  jso := TJSONObject.ParseJSONValue(url) as TJSONObject;
-  sts := StrToInt(jso.GetValue('value').Value);
-  psn := jso.GetValue('pesan').Value;
-
-  if sts = 1 then
-  begin
-    MessageDlg(psn, TMsgDlgType.mtInformation, [TMsgDlgBtn.mbOK], 0);
-    clearForm();
-    form_utama.btnRefresh.Click;
-    Self.Close;
-  end
-  else
-  begin
-    MessageDlg(psn, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
-  end;
-  jso.Free;
 end;
 
 procedure Tform_insert.clearForm();

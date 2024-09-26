@@ -13,7 +13,6 @@ object form_utama: Tform_utama
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
-  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object strGridData: TStringGrid

@@ -6,10 +6,10 @@
     <Transaction>2024/09/14 17:28:21.000.780,D:\up2github\Delphi_Console\warga_json\FormUtama.dfm=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2024/09/14 17:28:37.000.627,D:\up2github\Delphi_Console\warga_json\DataOnline.dproj=C:\Users\Pongo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2024/09/15 01:05:00.000.339,=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
-    <Transaction>2024/09/15 01:59:35.000.642,D:\up2github\Delphi_Console\warga_json\FormInsert.pas=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
     <Transaction>2024/09/15 01:59:35.000.642,D:\up2github\Delphi_Console\warga_json\FormInsert.dfm=D:\up2github\Delphi_Console\warga_json\Unit1.dfm</Transaction>
-    <Transaction>2024/09/16 09:57:56.852,=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
-    <Transaction>2024/09/16 09:58:14.874,D:\up2github\Delphi_Console\warga_json\FormEdit.dfm=D:\up2github\Delphi_Console\warga_json\Unit1.dfm</Transaction>
-    <Transaction>2024/09/16 09:58:14.874,D:\up2github\Delphi_Console\warga_json\FormEdit.pas=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
+    <Transaction>2024/09/15 01:59:35.000.642,D:\up2github\Delphi_Console\warga_json\FormInsert.pas=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
+    <Transaction>2024/09/16 09:57:56.000.852,=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
+    <Transaction>2024/09/16 09:58:14.000.874,D:\up2github\Delphi_Console\warga_json\FormEdit.pas=D:\up2github\Delphi_Console\warga_json\Unit1.pas</Transaction>
+    <Transaction>2024/09/16 09:58:14.000.874,D:\up2github\Delphi_Console\warga_json\FormEdit.dfm=D:\up2github\Delphi_Console\warga_json\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

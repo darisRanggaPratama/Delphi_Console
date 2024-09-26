@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, System.JSON,
-  IdHTTP, IdSSLOpenSSL, IdSSLOpenSSLHeaders;
+  System.Net.HttpClient,
+  System.Net.URLClient, System.Net.HttpClientComponent;
 
 type
   Tform_utama = class(TForm)
@@ -18,7 +19,7 @@ type
     procedure btnSaveClick(Sender: TObject);
 
     procedure strGridDataDblClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
     procedure AturKolom;
@@ -64,11 +65,6 @@ begin
   form_insert.ShowModal;
 end;
 
-procedure Tform_utama.FormCreate(Sender: TObject);
-begin
-  IdSSLOpenSSL.LoadOpenSSLLibrary;
-end;
-
 procedure Tform_utama.FormShow(Sender: TObject);
 begin
   AturKolom();
@@ -83,54 +79,61 @@ begin
   form_edit.ShowModal;
 end;
 
-  procedure Tform_utama.TampilData();
+procedure Tform_utama.TampilData();
 var
-  htp: TIdHTTP;
-  ssl: TIdSSLIOHandlerSocketOpenSSL;
-  jso: TJSONObject;
-  jss: TJSONObject;
-  jsa: TJSONArray;
+  HttpClient: TNetHTTPClient;
+  httpResponse: IHTTPResponse;
+  jsonData: TJSONObject;
+  jsonArray: TJSONArray;
+  jsonItem: TJSONObject;
   url: string;
-  iii: Integer;
+  i: Integer;
+
 begin
-  htp := TIdHTTP.Create(nil);
-  ssl := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  HttpClient := TNetHTTPClient.Create(nil);
   try
-    htp.IOHandler := ssl;
-    ssl.SSLOptions.SSLVersions := [sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2];
-
-    // Tambahkan kode ini di sini
-    htp.HandleRedirects := True;
-    htp.RedirectMaximum := 5;
-
     url := 'https://hyvoy.com/crud_json_delphi/view.php';
+
     try
-      url := htp.Get(url);
+      httpResponse := HttpClient.Get(url);
+      if httpResponse.StatusCode = 200 then
+      begin
+        jsonData := TJSONObject.ParseJSONValue(httpResponse.ContentAsString)
+          as TJSONObject;
+        try
+          jsonArray := jsonData.GetValue('result') as TJSONArray;
+          strGridData.RowCount := jsonArray.Count + 1;
+
+          for i := 0 to jsonArray.Count - 1 do
+          begin
+            jsonItem := jsonArray.Items[i] as TJSONObject;
+            // untuk nomor urut
+            strGridData.Cells[0, i + 1] := Format('%d', [i + 1]);
+            strGridData.Cells[1, i + 1] := jsonItem.GetValue('id').Value;
+            strGridData.Cells[2, i + 1] := jsonItem.GetValue('nama').Value;
+            strGridData.Cells[3, i + 1] := jsonItem.GetValue('jk').Value;
+            strGridData.Cells[4, i + 1] := jsonItem.GetValue('telp').Value;
+          end;
+        finally
+          jsonData.Free;
+        end;
+
+      end
+      else
+      begin
+        ShowMessage('Error: ' + httpResponse.StatusCode.ToString + ' ' +
+          httpResponse.StatusText);
+      end;
+
     except
       on E: Exception do
       begin
         ShowMessage('Error: ' + E.Message);
-        Exit;
       end;
     end;
 
-    jso := TJSONObject.ParseJSONValue(url) as TJSONObject;
-    jsa := jso.GetValue('result') as TJSONArray;
-    strGridData.RowCount := jsa.Count + 1;
-    for iii := 0 to jsa.Count - 1 do
-    begin
-      jss := jsa.Items[iii] as TJSONObject;
-      // untuk nomor urut
-      strGridData.Cells[0, iii + 1] := Format('%d', [iii + 1]);
-      strGridData.Cells[1, iii + 1] := jss.GetValue('id').Value;
-      strGridData.Cells[2, iii + 1] := jss.GetValue('nama').Value;
-      strGridData.Cells[3, iii + 1] := jss.GetValue('jk').Value;
-      strGridData.Cells[4, iii + 1] := jss.GetValue('telp').Value;
-    end;
   finally
-    FreeAndNil(htp);
-    FreeAndNil(ssl);
-    FreeAndNil(jso);
+    HttpClient.Free;
   end;
 end;
 

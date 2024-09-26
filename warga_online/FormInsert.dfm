@@ -2,8 +2,8 @@ object form_insert: Tform_insert
   Left = 0
   Top = 0
   Caption = 'Insert Data'
-  ClientHeight = 324
-  ClientWidth = 626
+  ClientHeight = 320
+  ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
